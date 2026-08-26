@@ -145,7 +145,7 @@ no broken URL. When the app launches, turn them back into links:
 
 This folder **is** the GitHub repository
 (<https://github.com/roshan5619/QuanvergeLabs>), and the live site at
-<https://quanvergelabs.com> is served from it by GitHub Pages.
+<https://www.quanvergelabs.com> is served from it by GitHub Pages.
 
 To publish an edit:
 
@@ -161,17 +161,37 @@ own address:
 
 | File | Address |
 |---|---|
-| `index.html` | `quanvergelabs.com` |
-| `products.html` | `quanvergelabs.com/products.html` |
-| `q-vis.html` | `quanvergelabs.com/q-vis.html` |
+| `index.html` | `www.quanvergelabs.com` |
+| `products.html` | `www.quanvergelabs.com/products.html` |
+| `q-vis.html` | `www.quanvergelabs.com/q-vis.html` |
 
 `index.html` is special — it's what a web server shows when someone visits the
 domain with no page name. Keep that filename as it is.
 
+The address with `www.` is the canonical one. GitHub redirects the bare
+`quanvergelabs.com` to it automatically, provided the DNS records below stay
+in place.
+
+### DNS records this site depends on
+
+Set at the domain registrar (Hostinger), under DNS / Nameservers:
+
+| Type | Name | Value |
+|---|---|---|
+| CNAME | `www` | `roshan5619.github.io` |
+| A | `@` | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+
+The `A` records are what make the bare domain redirect to `www`. The four
+addresses are GitHub's — they are the same for everyone using Pages.
+
 ### Two files that keep the hosting working
 
-- **`CNAME`** contains `quanvergelabs.com`. It tells GitHub Pages which domain
-  to serve. Deleting or misspelling it takes the site offline.
+- **`CNAME`** contains `www.quanvergelabs.com`. It tells GitHub Pages which domain
+  to serve. Deleting or misspelling it takes the site offline. GitHub rewrites
+  this file if you change the domain in Settings → Pages, so pull afterwards.
 - **`.nojekyll`** is empty on purpose. It stops GitHub from running the files
   through a blog generator before publishing them.
 
