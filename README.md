@@ -141,23 +141,39 @@ no broken URL. When the app launches, turn them back into links:
 
 ...and upload the React build into an `app` folder beside this site.
 
-## Deploying to Hostinger
+## Publishing changes
 
-1. In Hostinger, open **File Manager** and go to `public_html`.
-2. Upload **all ten `.html` files**, plus the `css`, `js` and `images` folders.
-3. Visit your domain — it's live.
+This folder **is** the GitHub repository
+(<https://github.com/roshan5619/QuanvergeLabs>), and the live site at
+<https://quanvergelabs.com> is served from it by GitHub Pages.
 
-There's nothing to build or compile. What's in this folder is exactly what
-goes on the server, and each page gets its own address:
+To publish an edit:
+
+```
+git add -A
+git commit -m "Describe what you changed"
+git push
+```
+
+The site updates about a minute later. There is nothing to build or upload —
+what's in this folder is exactly what goes on the web, and each page gets its
+own address:
 
 | File | Address |
 |---|---|
-| `index.html` | `yourdomain.com` |
-| `products.html` | `yourdomain.com/products.html` |
-| `q-vis.html` | `yourdomain.com/q-vis.html` |
+| `index.html` | `quanvergelabs.com` |
+| `products.html` | `quanvergelabs.com/products.html` |
+| `q-vis.html` | `quanvergelabs.com/q-vis.html` |
 
-`index.html` is special — it's what a web server shows when someone visits
-your domain with no page name. Keep that filename as it is.
+`index.html` is special — it's what a web server shows when someone visits the
+domain with no page name. Keep that filename as it is.
+
+### Two files that keep the hosting working
+
+- **`CNAME`** contains `quanvergelabs.com`. It tells GitHub Pages which domain
+  to serve. Deleting or misspelling it takes the site offline.
+- **`.nojekyll`** is empty on purpose. It stops GitHub from running the files
+  through a blog generator before publishing them.
 
 ## A note on the two versions
 
