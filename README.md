@@ -48,8 +48,21 @@ browser. That's the whole workflow.
 | A product's description, use cases, table or calculator | that product's page, e.g. `q-vis.html` |
 | Names, roles, bios, LinkedIn links | `team.html` |
 | Publications (currently a placeholder) | `research.html` |
-| The three roadmap phases | `roadmap.html` |
 | Address and email | `contact.html` |
+| The "page not found" page | `404.html` |
+
+### Adding or replacing images
+
+Put the file in `images/` and reference it from the page. Two rules:
+
+1. **Use lowercase filenames.** The live server is case-sensitive but Windows
+   isn't, so `MyImage.PNG` can work on your machine and 404 once deployed.
+2. **Compress before committing.** The supplied artwork was 614 KB and is now
+   109 KB with no visible difference. Photographic images should be JPEG at
+   quality 88; only use PNG when you genuinely need transparency.
+
+Product images sit in a fixed-ratio frame that crops to fill, so they stay
+aligned even when the source files have different dimensions.
 
 ### The navigation bar and footer
 
@@ -88,6 +101,20 @@ of 4.5:1. The logo's bright cyan (`#2fc6d6`) only reaches 2.1:1, which is why
 it is kept as `--brand-fill` and used *behind* white text in buttons, never as
 text on white. Each colour in the file has its ratio noted in a comment. If you
 pick a new colour, check it at <https://webaim.org/resources/contrastchecker/>.
+
+### Light and dark themes
+
+There are **two** palettes in `css/styles.css`: the light one in `:root`, and a
+dark one just below it in `:root[data-theme="dark"]`. They use the same variable
+names, so the rest of the stylesheet doesn't know or care which is active.
+
+If you change a colour, change it in **both** blocks, or the site will look
+wrong in one theme. In dark mode the brand colour flips to the logo's bright
+cyan, which is unreadable on white but ideal on a dark ground.
+
+The visitor's choice is remembered in their browser. A short script in each
+page's `<head>` applies it before the page draws — that's what stops a white
+flash before switching to dark, so leave it where it is.
 
 ### Changing the ROI calculator maths
 
