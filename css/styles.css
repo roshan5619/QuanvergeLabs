@@ -683,6 +683,21 @@ input:focus-visible {
   margin-bottom: 20px;
 }
 
+/* Shows an image at its own size and shape instead of filling a wide frame.
+   Use this when the artwork is small or nearly square: stretching it would
+   blur it, and a 16:10 crop would cut the top and bottom off. */
+.product-figure.is-native {
+  aspect-ratio: auto;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.product-figure.is-native img {
+  height: auto;
+  object-fit: contain;
+}
+
 /* Browsers without aspect-ratio support fall back to a fixed height */
 @supports not (aspect-ratio: 1) {
   .product-figure { height: 240px; }
