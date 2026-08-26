@@ -689,6 +689,77 @@ input:focus-visible {
   .product-card .product-figure { height: 180px; }
 }
 
+/* --- Animated product graphics -----------------------------------------
+   Drawn in SVG rather than supplied as images, so they stay perfectly sharp
+   at any size on any screen and weigh only a few KB. The panel stays dark
+   in both themes so it matches the artwork on the products grid.
+
+   Every animation below settles on a finished, sensible frame, so the
+   reduced-motion rule in section 13 (which collapses animations to almost
+   zero duration) leaves a complete picture rather than a half-drawn one.  */
+
+.product-viz {
+  margin: 0 0 26px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #0b1a22;
+  aspect-ratio: 16 / 10;
+}
+
+.product-viz svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@supports not (aspect-ratio: 1) {
+  .product-viz { height: 400px; }
+}
+
+/* A scanning beam travelling down and back up */
+@keyframes viz-scan {
+  0%, 100% { transform: translateY(-96px); }
+  50%      { transform: translateY(96px); }
+}
+.viz-scan { animation: viz-scan 4.5s ease-in-out infinite; }
+
+/* Strokes that draw themselves in */
+@keyframes viz-draw { to { stroke-dashoffset: 0; } }
+.viz-draw {
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: viz-draw 2.6s ease-out forwards;
+}
+
+/* Soft pulse for nodes and detection points */
+@keyframes viz-pulse {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 1; }
+}
+.viz-pulse { animation: viz-pulse 2.8s ease-in-out infinite; }
+
+/* Bars growing up from the axis */
+@keyframes viz-rise { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+.viz-rise {
+  transform-origin: bottom;
+  animation: viz-rise 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Elements fading in one after another */
+@keyframes viz-appear { from { opacity: 0; } to { opacity: 1; } }
+.viz-appear {
+  opacity: 0;
+  animation: viz-appear 0.7s ease-out forwards;
+}
+
+/* A slow drift, used on the lattice */
+@keyframes viz-drift {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+.viz-drift { animation: viz-drift 6s ease-in-out infinite; }
+
 /* The body of a single product page */
 .product-detail { padding: 34px; }
 
