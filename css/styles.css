@@ -1149,7 +1149,52 @@ input:focus-visible {
   color: var(--text-faint);
 }
 
-.team-card .product-card-link { margin-top: 14px; }
+/* Headshots. Cropped square and centred on the face, so the circle frames
+   the person rather than their shoulders. The background colour shows
+   through on portraits shot against a plain backdrop. */
+.team-photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--surface-2);
+  border: 2px solid var(--border);
+}
+
+.profile-header .team-photo {
+  width: 112px;
+  height: 112px;
+  border-width: 3px;
+}
+
+/* "View profile" and the LinkedIn link sit on one row */
+.card-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 14px;
+}
+
+.card-actions .product-card-link { margin-top: 0; }
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-faint);
+  transition: color 0.2s;
+}
+
+.social-link:hover { color: var(--brand); }
+
+.social-link svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
 
 
 /* 9. RESEARCH & PROFILES =================================================== */
