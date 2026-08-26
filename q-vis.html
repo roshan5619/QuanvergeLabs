@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q-Vis — Quantum-Enhanced Computer Vision | Quanverge Labs</title>
+  <meta name="description" content="Object detection, image processing, and on-device image compression at the edge — for UAV/AUV, manufacturing, agritech, and security deployments.">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="icon" href="images/QUANVERGE.jpeg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="page-background"></div>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+
+    <a href="index.html" class="navbar-logo">
+      <img src="images/QUANVERGE.jpeg" alt="Quanverge Labs logo">
+      <span>Quanverge</span>
+    </a>
+
+    <button class="navbar-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">&#9776;</button>
+
+    <ul class="navbar-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html" class="is-current">Products</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="roadmap.html">Roadmap</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><span class="navbar-cta is-soon">Sign In &middot; Coming Soon</span></li>
+    </ul>
+
+  </div>
+</nav>
+
+
+<main>
+
+<section class="section page-header">
+  <a href="products.html" class="back-link">&larr; All Products</a>
+
+  <div class="product-title-row">
+    <span class="monogram monogram-lg">Q-</span>
+    <div>
+      <p class="product-category">Computer Vision</p>
+      <h1 class="section-heading">Q-Vis</h1>
+    </div>
+  </div>
+
+  <p class="section-intro">
+    Q-Vis delivers quantum-enhanced vision for object detection, image
+    processing, and image compression &mdash; achieving detection accuracy,
+    processing speed, and payload sizes that classical computer vision
+    systems struggle to match on edge hardware.
+  </p>
+
+  <span class="product-badge">10x less data &middot; 10x faster</span>
+</section>
+
+
+<section class="section section-tight">
+  <div class="card card-brand product-detail">
+
+    <p class="subheading">Use Cases</p>
+    <ul class="use-cases">
+      <li><span class="arrow">&rarr;</span><span><strong>UAV/AUV:</strong> Real-time object detection for aerial and sub-surface autonomous systems</span></li>
+      <li><span class="arrow">&rarr;</span><span><strong>Manufacturing:</strong> Edge-based fault and defect detection on the production line</span></li>
+      <li><span class="arrow">&rarr;</span><span><strong>Agritech:</strong> On-device image compression for crop and field monitoring over low-bandwidth rural networks</span></li>
+      <li><span class="arrow">&rarr;</span><span><strong>Security:</strong> Low-latency surveillance and perimeter monitoring at the edge</span></li>
+    </ul>
+
+    <p class="subheading">Benchmarks</p>
+    <div class="table-wrapper">
+      <table class="comparison-table">
+        <thead>
+          <tr><th>Feature</th><th>Classical AI (SOTA)</th><th>Quanverge Hybrid</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Training Images</td><td>Hundreds of Thousands</td><td>Tens of Thousands</td></tr>
+          <tr><td>Hardware</td><td>GPU Required</td><td>CPU / Edge Device</td></tr>
+          <tr><td>Inference Latency</td><td>Baseline</td><td>10x Faster</td></tr>
+          <tr><td>Image Payload</td><td>Full-resolution transfer</td><td>Compressed On-Device</td></tr>
+          <tr><td>Power Draw</td><td>High (GPU cluster)</td><td>Low (edge-deployable)</td></tr>
+          <tr><td>Deployment</td><td>Weeks</td><td>Days</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button class="roi-toggle" aria-expanded="false" aria-controls="roi-q-vis">
+      <span class="plus">+</span> Calculate Q-Vis ROI for your organization
+    </button>
+
+    <div class="roi-panel" id="roi-q-vis">
+      <p class="roi-title">Estimate your Q-Vis ROI</p>
+
+      <div class="roi-controls">
+        <div>
+          <label class="roi-control-label" for="qvis-latency">
+            <span>Current inference latency</span>
+            <output for="qvis-latency"></output>
+          </label>
+          <input type="range" id="qvis-latency" data-roi-input data-roi-unit="ms"
+                 min="10" max="2000" step="10" value="200">
+        </div>
+        <div>
+          <label class="roi-control-label" for="qvis-images">
+            <span>Training images required today</span>
+            <output for="qvis-images"></output>
+          </label>
+          <input type="range" id="qvis-images" data-roi-input data-roi-unit="images"
+                 min="5000" max="5000000" step="5000" value="500000">
+        </div>
+      </div>
+
+      <div class="roi-results">
+        <div class="roi-result">
+          <p class="roi-result-label">Estimated latency with Quanverge</p>
+          <p class="roi-result-value">
+            <span data-roi-output data-roi-source="qvis-latency" data-roi-op="divide" data-roi-by="10"></span>
+            <span class="unit">ms</span>
+          </p>
+          <p class="roi-cite">Based on: 10x faster inference at edge</p>
+        </div>
+        <div class="roi-result">
+          <p class="roi-result-label">Images needed with Quanverge</p>
+          <p class="roi-result-value">
+            <span data-roi-output data-roi-source="qvis-images" data-roi-op="divide" data-roi-by="10"></span>
+            <span class="unit">images</span>
+          </p>
+          <p class="roi-cite">Based on: 10x less data</p>
+        </div>
+      </div>
+
+      <p class="roi-disclaimer">
+        Illustrative estimate based on Quanverge's published benchmarks &mdash;
+        actual results vary by deployment.
+      </p>
+    </div>
+
+  </div>
+
+  <nav class="product-nav">
+    <a href="reqagnize.html">&larr; ReQAgnIze</a>
+    <a href="sanqya.html">Next: SanQya &rarr;</a>
+  </nav>
+</section>
+
+</main>
+
+
+<footer class="footer">
+  <div class="footer-inner">
+    <img src="images/QUANVERGE.jpeg" alt="Quanverge Labs logo">
+    <p>
+      &copy; <span id="year"></span> Quanverge Labs &amp; Mahindra University.
+      All rights reserved. <a href="contact.html">Contact Us</a>
+    </p>
+  </div>
+</footer>
+
+
+<script src="js/main.js"></script>
+</body>
+</html>

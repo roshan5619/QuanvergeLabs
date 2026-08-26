@@ -1,0 +1,1139 @@
+/* ==========================================================================
+   QUANVERGE LABS — stylesheet
+   --------------------------------------------------------------------------
+   Contents:
+     1. Colour & font variables   <- change the whole site's look here
+     2. Base / resets
+     3. Reusable pieces (buttons, glass cards, section headings)
+     4. Navigation bar
+     5. Hero
+     6. Problem
+     7. Products (tabs, comparison table, ROI calculator)
+     8. Team
+     9. Research
+    10. Roadmap
+    11. Contact
+    12. Final call-to-action & footer
+    13. Mobile layout
+    14. Reduced-motion support
+   ========================================================================== */
+
+
+/* 1. COLOUR & FONT VARIABLES ===============================================
+   Every colour on the site comes from here. Change a value once and it
+   updates everywhere. Colours are taken from the Quanverge logo.           */
+
+:root {
+  /* --- Backgrounds --------------------------------------------------- */
+  --bg:            #ffffff;   /* the page itself */
+  --surface:       #f6f9fb;   /* cards and footer — a hint of teal-grey */
+  --surface-2:     #eef4f7;   /* table headers, hover states */
+  --border:        #dde7ec;   /* card edges and dividers */
+
+  /* --- Text ----------------------------------------------------------
+     The numbers are contrast ratios against white. Anything below 4.5
+     is unreadable to many people, so don't lighten these further.      */
+  --text:          #0b2530;   /* 16.1 : 1   body text and headings */
+  --text-muted:    #4a636e;   /*  6.2 : 1   secondary paragraphs */
+  --text-faint:    #536c78;   /*  5.2 : 1   small labels — already at the limit */
+
+  /* --- Brand teal, sampled from the logo's nested chevrons -----------
+     The logo's bright cyan only scores 1.9:1 on white, so it can't be
+     used for text. We keep it as --brand-fill for solid buttons (where
+     white text sits on top of it) and use darker teals for anything
+     that has to be read.                                               */
+  --brand:         #14708a;   /*  5.6 : 1   links, small text, accents */
+  --brand-strong:  #0d5568;   /*            hover and pressed states */
+  --brand-heading: #1f86a3;   /*  4.1 : 1   large headings only (24px+) */
+  --brand-fill:    #2fc6d6;   /*            logo cyan — fills only, never text */
+  --brand-soft:    #e6f6f9;   /*            badge and pill backgrounds */
+
+  /* --- Secondary accent (ROI figures, roadmap markers) ---------------- */
+  --accent:        #9a6410;   /*  4.9 : 1   amber, darkened to read on white */
+  --accent-soft:   #fdf3e2;
+
+  /* --- Status -------------------------------------------------------- */
+  --green:         #067a5b;   /*  5.1 : 1 */
+  --green-soft:    #e7f6f1;
+
+  /* --- Fonts (loaded from Google Fonts in index.html) ---------------- */
+  --font-body:     "Outfit", system-ui, sans-serif;
+  --font-display:  "Playfair Display", Georgia, serif;
+
+  /* --- Layout -------------------------------------------------------- */
+  --max-width:     1100px;
+}
+
+
+/* 2. BASE / RESETS ========================================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Stops the fixed navbar covering headings when you jump to a section */
+  scroll-padding-top: 90px;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+/* Keyboard users must always be able to see what they've focused */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Faint grid pattern sitting behind the whole page */
+.page-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(20, 112, 138, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 112, 138, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  /* Fades the grid out towards the edges */
+  -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 75%);
+          mask-image: radial-gradient(ellipse at center, black 0%, transparent 75%);
+}
+
+
+/* 3. REUSABLE PIECES ======================================================= */
+
+/* Every section shares this wrapper: consistent width and vertical spacing */
+.section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 90px 24px;
+}
+
+/* The first section on an interior page. The extra top padding clears the
+   fixed navigation bar. */
+.page-header {
+  padding-top: 130px;
+  padding-bottom: 20px;
+}
+
+/* Follow-on sections sit closer to what's above them */
+.section-tight { padding-top: 20px; }
+
+/* Centres a section's contents */
+.center { text-align: center; }
+.center-text { margin-left: auto; margin-right: auto; }
+
+.center-cta {
+  margin-top: 32px;
+  text-align: center;
+}
+
+/* Small teal label above a heading, e.g. "THE CHALLENGE" */
+.eyebrow {
+  display: inline-block;
+  color: var(--brand);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.section-intro {
+  color: var(--text-muted);
+  max-width: 620px;
+  margin-top: 16px;
+}
+
+/* Teal gradient applied to text (used on the hero headline).
+   Both ends are dark enough to stay readable on a white background. */
+.text-gradient {
+  background: linear-gradient(135deg, var(--brand-strong) 0%, var(--brand-heading) 50%, var(--brand-strong) 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.text-brand { color: var(--brand); }
+
+/* Light panel used for most cards */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 1px 3px rgba(11, 37, 48, 0.06);
+}
+
+/* Same panel but with a teal edge, for emphasis */
+.card-brand {
+  border-color: rgba(20, 112, 138, 0.28);
+}
+
+/* Filled teal button — white text on a teal fill reads well */
+.btn {
+  display: inline-block;
+  padding: 15px 32px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--brand-strong), var(--brand), var(--brand-strong));
+  background-size: 200% auto;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background-position 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+  background-position: right center;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(20, 112, 138, 0.28);
+}
+
+/* Outlined version of the button */
+.btn-outline {
+  display: inline-block;
+  padding: 15px 32px;
+  border-radius: 999px;
+  border: 1px solid var(--brand);
+  background: var(--bg);
+  color: var(--brand);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
+}
+
+.btn-outline:hover {
+  background: var(--brand-soft);
+}
+
+/* "Coming soon" state — looks deliberately inactive, and isn't a link */
+.is-soon {
+  display: inline-block;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-faint);
+  cursor: default;
+  box-shadow: none;
+}
+
+.is-soon:hover {
+  transform: none;
+  box-shadow: none;
+  background: var(--surface-2);
+}
+
+/* Two-letter product mark (Re, Q-, Sa, Qr). We use these instead of icons
+   because the Quanverge logo is the only image mark on the site. */
+.monogram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--brand-heading), var(--brand-strong));
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.monogram-sm { width: 40px; height: 40px; font-size: 0.85rem; border-radius: 10px; }
+.monogram-lg { width: 72px; height: 72px; font-size: 1.5rem; border-radius: 50%; }
+
+/* Elements start invisible and fade upwards when scrolled into view.
+   The .is-visible class is added by js/main.js. */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* 4. NAVIGATION BAR ======================================================== */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: blur(16px);
+          backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.navbar-logo img {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+
+.navbar-links a {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.navbar-links a:hover { color: var(--brand); }
+
+/* Marks which page you're currently on */
+.navbar-links a.is-current {
+  color: var(--brand);
+  font-weight: 600;
+}
+
+.navbar-cta {
+  padding: 9px 20px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--brand), var(--brand-strong));
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: transform 0.2s;
+}
+
+.navbar-cta:hover { transform: scale(1.05); }
+
+/* When the CTA is a "coming soon" label it shouldn't grow on hover */
+.navbar-cta.is-soon:hover { transform: none; }
+
+/* Hamburger button — hidden on desktop, shown on mobile (see section 13) */
+.navbar-toggle {
+  display: none;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--text);
+}
+
+
+/* 5. HERO ================================================================== */
+
+.hero {
+  text-align: center;
+  padding-top: 150px;
+}
+
+/* The thin "systems operational" strip at the very top */
+.status-ticker {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 24px;
+  padding: 10px 22px;
+  margin-bottom: 32px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--green-soft);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.status-live {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--green);
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.35; }
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  padding: 7px 18px;
+  margin-bottom: 26px;
+  border: 1px solid rgba(20, 112, 138, 0.3);
+  border-radius: 999px;
+  background: var(--brand-soft);
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 8vw, 4.6rem);
+  font-weight: 700;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+/* The blinking cursor after the headline */
+.caret {
+  display: inline-block;
+  width: 5px;
+  height: 0.8em;
+  margin-left: 6px;
+  background: var(--brand-heading);
+  vertical-align: middle;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.hero-subtitle {
+  max-width: 560px;
+  margin: 28px auto 0;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+/* The row of five numbers (100x, 10x, 4, 20+, 350M+) */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  max-width: 900px;
+  margin: 64px auto 0;
+}
+
+.hero-stat-value {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  font-weight: 700;
+  color: var(--brand);
+}
+
+.hero-stat-label {
+  margin-top: 4px;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.scroll-hint {
+  margin-top: 70px;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  animation: bob 2s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(10px); }
+}
+
+
+/* 6. PROBLEM =============================================================== */
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 44px;
+}
+
+.problem-card { padding: 28px; }
+
+.problem-card .dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand);
+  margin-bottom: 16px;
+}
+
+.problem-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.problem-card p {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+
+/* 7. PRODUCTS ============================================================== */
+
+.products-header { text-align: center; }
+.products-header .section-intro { margin-left: auto; margin-right: auto; }
+
+/* The body of a single product page */
+.product-detail { padding: 34px; }
+
+.product-category {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.product-title-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.product-title-row h1,
+.product-title-row h2,
+.product-title-row h3 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+}
+
+/* On a product page the title sits next to a large monogram, so the
+   heading shouldn't carry its own top margin. */
+.product-title-row .section-heading { margin-top: 2px; }
+
+/* --- Cards on the products overview page --- */
+
+.product-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.product-card {
+  display: block;
+  padding: 28px;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(11, 37, 48, 0.1);
+}
+
+.product-card .product-title-row { margin-top: 0; }
+.product-card .product-title-row h2 { font-size: 1.5rem; }
+.product-card .product-category { margin-top: 2px; }
+
+.product-card-text {
+  margin-top: 16px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.product-card .metric {
+  margin-top: 14px;
+  font-weight: 600;
+  color: var(--brand);
+}
+
+.product-card-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--brand);
+}
+
+/* Previous / next links at the foot of a product page */
+.product-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 28px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.product-nav a { color: var(--brand); }
+.product-nav a:hover { color: var(--brand-strong); }
+/* When there's only a "next" link, push it to the right */
+.product-nav a:only-child { margin-left: auto; }
+
+/* "All Products" link at the top of a product page */
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-faint);
+}
+
+.back-link:hover { color: var(--brand); }
+
+.product-badge {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 7px 18px;
+  border: 1px solid rgba(20, 112, 138, 0.3);
+  border-radius: 999px;
+  background: var(--brand-soft);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.subheading {
+  margin: 28px 0 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.use-cases { list-style: none; }
+
+.use-cases li {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.use-cases .arrow { color: var(--brand); }
+.use-cases strong { color: var(--text); }
+
+/* Classical vs Quanverge comparison table.
+   The wrapper lets the table scroll sideways on small screens. */
+.table-wrapper {
+  overflow-x: auto;
+  margin-top: 26px;
+}
+
+.comparison-table {
+  width: 100%;
+  min-width: 460px;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  text-align: left;
+}
+
+.comparison-table th {
+  padding: 10px 16px 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.comparison-table th:last-child { color: var(--brand); }
+
+.comparison-table td {
+  padding: 12px 16px 12px 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.comparison-table td:first-child { color: var(--text); }
+.comparison-table td:last-child  { color: var(--brand-strong); font-weight: 600; }
+
+/* --- ROI calculator --- */
+
+.roi-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 26px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--brand);
+  transition: color 0.2s;
+}
+
+.roi-toggle:hover { color: var(--brand-strong); }
+
+/* The "+" rotates into an "×" when the panel is open */
+.roi-toggle .plus {
+  display: inline-block;
+  font-size: 1.2rem;
+  transition: transform 0.3s;
+}
+
+.roi-toggle[aria-expanded="true"] .plus { transform: rotate(45deg); }
+
+.roi-panel {
+  display: none;
+  margin-top: 22px;
+  padding: 26px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--bg);
+}
+
+.roi-panel.is-open { display: block; }
+
+.roi-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 22px;
+}
+
+.roi-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+}
+
+.roi-control-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.roi-control-label output {
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+/* accent-color tints the slider with our brand colour in one line */
+.roi-controls input[type="range"] {
+  width: 100%;
+  accent-color: var(--brand);
+}
+
+.roi-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 26px;
+}
+
+.roi-result {
+  padding: 16px;
+  border: 1px solid rgba(154, 100, 16, 0.25);
+  border-radius: 12px;
+  background: var(--accent-soft);
+}
+
+.roi-result-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.roi-result-value {
+  margin-top: 4px;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.roi-result-value .unit {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--text-faint);
+}
+
+.roi-cite {
+  margin-top: 4px;
+  font-size: 0.72rem;
+  color: var(--text-faint);
+}
+
+.roi-disclaimer {
+  margin-top: 20px;
+  font-size: 0.72rem;
+  color: var(--text-faint);
+}
+
+/* --- The four small summary cards under the tab panel --- */
+
+.product-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.product-summary {
+  display: block;
+  padding: 20px;
+  text-align: left;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.product-summary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(11, 37, 48, 0.1);
+}
+
+.product-summary h4 {
+  margin-top: 12px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+}
+
+.product-summary .category {
+  font-size: 0.72rem;
+  color: var(--text-faint);
+}
+
+.product-summary .metric {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--brand);
+}
+
+
+/* 8. TEAM ================================================================== */
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 44px;
+}
+
+.team-card { padding: 26px; }
+
+.team-card a { display: block; transition: opacity 0.2s; }
+.team-card a:hover { opacity: 0.85; }
+
+.team-card h3 {
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.team-role {
+  margin-top: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.team-bio {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+
+/* 9. RESEARCH ============================================================== */
+
+.research { text-align: center; }
+
+.research-card {
+  max-width: 560px;
+  margin: 40px auto 0;
+  padding: 40px;
+  color: var(--text-muted);
+}
+
+
+/* 10. ROADMAP ============================================================== */
+
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 44px;
+}
+
+.roadmap-phase { padding: 26px; }
+
+.roadmap-window {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.roadmap-window .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.roadmap-phase h3 {
+  margin-top: 12px;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--brand);
+}
+
+.roadmap-phase ul {
+  margin-top: 16px;
+  list-style: none;
+}
+
+.roadmap-phase li {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.roadmap-phase li::before {
+  content: "•";
+  color: var(--accent);
+}
+
+
+/* 11. CONTACT ============================================================== */
+
+.contact-card {
+  max-width: 640px;
+  margin: 44px auto 0;
+  padding: 36px;
+}
+
+.contact-row { margin-bottom: 26px; }
+.contact-row:last-child { margin-bottom: 0; }
+
+.contact-row h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+}
+
+.contact-row p,
+.contact-row a {
+  margin-top: 4px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.contact-row a:hover { color: var(--brand); }
+
+
+/* 12. FINAL CTA & FOOTER =================================================== */
+
+.final-cta { text-align: center; }
+
+.final-cta h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.final-cta p {
+  max-width: 480px;
+  margin: 20px auto 0;
+  color: var(--text-muted);
+}
+
+.final-cta .btn { margin-top: 36px; }
+
+.footer {
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  padding: 30px 24px;
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 0.85rem;
+  color: var(--text-faint);
+}
+
+.footer-inner img {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.footer-inner a { color: var(--brand); }
+.footer-inner a:hover { color: var(--brand-strong); }
+
+
+/* 13. MOBILE LAYOUT ========================================================
+   Anything inside this block only applies on screens 860px wide or less.   */
+
+@media (max-width: 860px) {
+
+  /* Swap the desktop link row for a dropdown opened by the hamburger */
+  .navbar-toggle { display: block; }
+
+  .navbar-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 12px 24px 20px;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    box-shadow: 0 8px 16px rgba(11, 37, 48, 0.08);
+  }
+
+  /* .is-open is added by js/main.js when the hamburger is tapped */
+  .navbar-links.is-open { display: flex; }
+
+  .navbar-links li { padding: 10px 0; }
+
+  .hero { padding-top: 130px; }
+
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+
+  .problem-grid,
+  .team-grid,
+  .roadmap-grid,
+  .product-summary-grid,
+  .product-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section { padding: 60px 20px; }
+  .page-header { padding-top: 110px; }
+
+  .product-detail { padding: 24px; }
+
+  /* Stack the monogram above the product name on narrow screens */
+  .product-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .footer-inner { flex-direction: column; text-align: center; }
+}
+
+
+/* 14. REDUCED-MOTION SUPPORT ===============================================
+   Some people set their device to reduce motion (it can cause nausea or
+   distraction). This turns off our animations for them.                    */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html { scroll-behavior: auto; }
+
+  /* Make sure fade-in content is visible even without the animation */
+  .reveal { opacity: 1; transform: none; }
+}

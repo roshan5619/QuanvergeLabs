@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReQAgnIze — Quantum Facial Recognition | Quanverge Labs</title>
+  <meta name="description" content="Quantum-enhanced facial recognition and deduplication for BFSI, enterprise, and government — real-time matching on CPU-only hardware, secured with post-quantum cryptography.">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="icon" href="images/QUANVERGE.jpeg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="page-background"></div>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+
+    <a href="index.html" class="navbar-logo">
+      <img src="images/QUANVERGE.jpeg" alt="Quanverge Labs logo">
+      <span>Quanverge</span>
+    </a>
+
+    <button class="navbar-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">&#9776;</button>
+
+    <ul class="navbar-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html" class="is-current">Products</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="roadmap.html">Roadmap</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><span class="navbar-cta is-soon">Sign In &middot; Coming Soon</span></li>
+    </ul>
+
+  </div>
+</nav>
+
+
+<main>
+
+<section class="section page-header">
+  <a href="products.html" class="back-link">&larr; All Products</a>
+
+  <div class="product-title-row">
+    <span class="monogram monogram-lg">Re</span>
+    <div>
+      <p class="product-category">Digital Identity</p>
+      <h1 class="section-heading">ReQAgnIze</h1>
+    </div>
+  </div>
+
+  <p class="section-intro">
+    ReQAgnIze applies quantum-enhanced algorithms to facial recognition and
+    deduplication, matching and de-duplicating identities in real time across
+    large biometric databases &mdash; on standard CPU hardware, and secured
+    with post-quantum cryptography.
+  </p>
+
+  <span class="product-badge">CPU-only &middot; No GPU needed</span>
+</section>
+
+
+<section class="section section-tight">
+  <div class="card card-brand product-detail">
+
+    <p class="subheading">Use Cases</p>
+    <ul class="use-cases">
+      <li><span class="arrow">&rarr;</span><span><strong>BFSI:</strong> Login auth, KYC, transaction authorization</span></li>
+      <li><span class="arrow">&rarr;</span><span><strong>Enterprise:</strong> Access control, attendance, secure VPN</span></li>
+      <li><span class="arrow">&rarr;</span><span><strong>Government:</strong> Offline identity, welfare authentication</span></li>
+    </ul>
+
+    <p class="subheading">Benchmarks</p>
+    <div class="table-wrapper">
+      <table class="comparison-table">
+        <thead>
+          <tr><th>Feature</th><th>Classical AI (SOTA)</th><th>Quanverge Hybrid</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Training Images</td><td>Millions</td><td>Few Hundred</td></tr>
+          <tr><td>Hardware</td><td>GPU Required</td><td>CPU Only</td></tr>
+          <tr><td>Training Speed (1M faces)</td><td>Days</td><td>Hours</td></tr>
+          <tr><td>Security</td><td>AES/TLS Only</td><td>Quantum-Secure (PQC)</td></tr>
+          <tr><td>Deployment</td><td>Weeks</td><td>Hours</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ROI calculator.
+         To change the maths, edit the data- attributes on the result <span>:
+           data-roi-source = the id of the slider it reads
+           data-roi-op     = divide | multiply | errorDrop
+           data-roi-by     = the number to apply
+           data-roi-cap    = optional maximum for the result           -->
+    <button class="roi-toggle" aria-expanded="false" aria-controls="roi-reqagnize">
+      <span class="plus">+</span> Calculate ReQAgnIze ROI for your organization
+    </button>
+
+    <div class="roi-panel" id="roi-reqagnize">
+      <p class="roi-title">Estimate your ReQAgnIze ROI</p>
+
+      <div class="roi-controls">
+        <div>
+          <label class="roi-control-label" for="req-images">
+            <span>Training images you currently need</span>
+            <output for="req-images"></output>
+          </label>
+          <input type="range" id="req-images" data-roi-input data-roi-unit="images"
+                 min="10000" max="10000000" step="10000" value="1000000">
+        </div>
+        <div>
+          <label class="roi-control-label" for="req-weeks">
+            <span>Current deployment timeline</span>
+            <output for="req-weeks"></output>
+          </label>
+          <input type="range" id="req-weeks" data-roi-input data-roi-unit="weeks"
+                 min="1" max="26" step="1" value="4">
+        </div>
+      </div>
+
+      <div class="roi-results">
+        <div class="roi-result">
+          <p class="roi-result-label">Images needed with Quanverge</p>
+          <p class="roi-result-value">
+            <span data-roi-output data-roi-source="req-images" data-roi-op="divide" data-roi-by="100"></span>
+            <span class="unit">images</span>
+          </p>
+          <p class="roi-cite">Based on: 100x fewer training images (comparison table)</p>
+        </div>
+        <div class="roi-result">
+          <p class="roi-result-label">Same timeline with Quanverge</p>
+          <p class="roi-result-value">
+            <span data-roi-output data-roi-source="req-weeks" data-roi-op="multiply" data-roi-by="1"></span>
+            <span class="unit">hours (not weeks)</span>
+          </p>
+          <p class="roi-cite">Based on: deployment drops from weeks to hours (comparison table)</p>
+        </div>
+      </div>
+
+      <p class="roi-disclaimer">
+        Illustrative estimate based on Quanverge's published benchmarks &mdash;
+        actual results vary by deployment.
+      </p>
+    </div>
+
+  </div>
+
+  <nav class="product-nav">
+    <a href="q-vis.html">Next: Q-Vis &rarr;</a>
+  </nav>
+</section>
+
+</main>
+
+
+<footer class="footer">
+  <div class="footer-inner">
+    <img src="images/QUANVERGE.jpeg" alt="Quanverge Labs logo">
+    <p>
+      &copy; <span id="year"></span> Quanverge Labs &amp; Mahindra University.
+      All rights reserved. <a href="contact.html">Contact Us</a>
+    </p>
+  </div>
+</footer>
+
+
+<script src="js/main.js"></script>
+</body>
+</html>

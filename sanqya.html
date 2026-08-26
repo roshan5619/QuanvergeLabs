@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SanQya — Quantum Financial Risk &amp; Fraud Intelligence | Quanverge Labs</title>
+  <meta name="description" content="Quantum-enhanced credit risk scoring, fraud detection, portfolio optimization, and options pricing for banks and financial institutions — validated on real bank data.">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="icon" href="images/QUANVERGE.jpeg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="page-background"></div>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+
+    <a href="index.html" class="navbar-logo">
+      <img src="images/QUANVERGE.jpeg" alt="Quanverge Labs logo">
+      <span>Quanverge</span>
+    </a>
+
+    <button class="navbar-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">&#9776;</button>
+
+    <ul class="navbar-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html" class="is-current">Products</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="roadmap.html">Roadmap</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><span class="navbar-cta is-soon">Sign In &middot; Coming Soon</span></li>
+    </ul>
+
+  </div>
+</nav>
+
+
+<main>
+
+<section class="section page-header">
+  <a href="products.html" class="back-link">&larr; All Products</a>
+
+  <div class="product-title-row">
+    <span class="monogram monogram-lg">Sa</span>
+    <div>
+      <p class="product-category">Financial Intelligence</p>
+      <h1 class="section-heading">SanQya</h1>
+    </div>
+  </div>
+
+  <p class="section-intro">
+    SanQya applies quantum-enhanced machine learning to credit risk scoring,
+    fraud detection, portfolio optimization, and options pricing &mdash;
+    finding risk signal that classical models plateau on, without GPU
+    infrastructure.
+  </p>
+
+  <span class="product-badge">10-30% better accuracy</span>
+</section>
+
+
+<section class="section section-tight">
+  <div class="card card-brand product-detail">
+
+    <p class="subheading">Use Cases</p>
+    <ul class="use-cases">
+      <li><span class="arrow">&rarr;</span><span><strong>Banking:</strong> Credit scoring and loan underwriting</span></li>
+      <li><span class="arrow">&rarr;</span><span><strong>Fraud Ops:</strong> Real-time transaction fraud detection</span></li>
+      <li><span class="arrow">&rarr;</span><span><strong>Treasury:</strong> Bond risk analysis and portfolio optimization</span></li>
+    </ul>
+
+    <p class="subheading">Benchmarks</p>
+    <div class="table-wrapper">
+      <table class="comparison-table">
+        <thead>
+          <tr><th>Feature</th><th>Classical AI (SOTA)</th><th>Quanverge Hybrid</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Model Accuracy</td><td>Baseline (SOTA ML)</td><td>+10-30%</td></tr>
+          <tr><td>Hardware</td><td>GPU Required</td><td>CPU Only</td></tr>
+          <tr><td>Validation</td><td>Synthetic / backtest only</td><td>Real bank data (NDA)</td></tr>
+          <tr><td>Fraud False Positives</td><td>High</td><td>Reduced</td></tr>
+          <tr><td>Deployment</td><td>Weeks</td><td>Hours</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button class="roi-toggle" aria-expanded="false" aria-controls="roi-sanqya">
+      <span class="plus">+</span> Calculate SanQya ROI for your organization
+    </button>
+
+    <div class="roi-panel" id="roi-sanqya">
+      <p class="roi-title">Estimate your SanQya ROI</p>
+
+      <div class="roi-controls">
+        <div>
+          <label class="roi-control-label" for="sanqya-accuracy">
+            <span>Current model accuracy</span>
+            <output for="sanqya-accuracy"></output>
+          </label>
+          <input type="range" id="sanqya-accuracy" data-roi-input data-roi-unit="%"
+                 min="50" max="99" step="1" value="78">
+        </div>
+      </div>
+
+      <div class="roi-results">
+        <div class="roi-result">
+          <p class="roi-result-label">Estimated accuracy with Quanverge</p>
+          <p class="roi-result-value">
+            <span data-roi-output data-roi-source="sanqya-accuracy" data-roi-op="errorDrop" data-roi-by="0.3"></span>
+            <span class="unit">%</span>
+          </p>
+          <p class="roi-cite">Based on: up to 30% fewer errors, from 10-30% better accuracy on real bank data</p>
+        </div>
+      </div>
+
+      <p class="roi-disclaimer">
+        Illustrative estimate based on Quanverge's published benchmarks &mdash;
+        actual results vary by deployment.
+      </p>
+    </div>
+
+  </div>
+
+  <nav class="product-nav">
+    <a href="q-vis.html">&larr; Q-Vis</a>
+    <a href="qreate.html">Next: Qreate &rarr;</a>
+  </nav>
+</section>
+
+</main>
+
+
+<footer class="footer">
+  <div class="footer-inner">
+    <img src="images/QUANVERGE.jpeg" alt="Quanverge Labs logo">
+    <p>
+      &copy; <span id="year"></span> Quanverge Labs &amp; Mahindra University.
+      All rights reserved. <a href="contact.html">Contact Us</a>
+    </p>
+  </div>
+</footer>
+
+
+<script src="js/main.js"></script>
+</body>
+</html>

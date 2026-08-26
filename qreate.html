@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qreate — Quantum Inverse Design for Materials | Quanverge Labs</title>
+  <meta name="description" content="Quantum generative methods for inverse design of metamaterials, photonic devices, and pharmaceuticals — replacing trial-and-error simulation with directed design.">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="icon" href="images/QUANVERGE.jpeg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="page-background"></div>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+
+    <a href="index.html" class="navbar-logo">
+      <img src="images/QUANVERGE.jpeg" alt="Quanverge Labs logo">
+      <span>Quanverge</span>
+    </a>
+
+    <button class="navbar-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">&#9776;</button>
+
+    <ul class="navbar-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html" class="is-current">Products</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="roadmap.html">Roadmap</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><span class="navbar-cta is-soon">Sign In &middot; Coming Soon</span></li>
+    </ul>
+
+  </div>
+</nav>
+
+
+<main>
+
+<section class="section page-header">
+  <a href="products.html" class="back-link">&larr; All Products</a>
+
+  <div class="product-title-row">
+    <span class="monogram monogram-lg">Qr</span>
+    <div>
+      <p class="product-category">Materials &amp; Drug Design</p>
+      <h1 class="section-heading">Qreate</h1>
+    </div>
+  </div>
+
+  <p class="section-intro">
+    Qreate uses quantum generative methods for inverse design of novel
+    materials, metamaterials, and pharmaceuticals &mdash; exploring design
+    spaces that are impractical to search exhaustively with classical
+    methods, and replacing trial-and-error with directed design.
+  </p>
+
+  <span class="product-badge">&gt;50x data reduction</span>
+</section>
+
+
+<section class="section section-tight">
+  <div class="card card-brand product-detail">
+
+    <p class="subheading">Use Cases</p>
+    <ul class="use-cases">
+      <li><span class="arrow">&rarr;</span><span><strong>Aerospace:</strong> Lightweight metamaterials for structural and acoustic applications</span></li>
+      <li><span class="arrow">&rarr;</span><span><strong>Pharma:</strong> Accelerated candidate generation for drug discovery</span></li>
+      <li><span class="arrow">&rarr;</span><span><strong>Photonics:</strong> Inverse-designed photonic devices for optical and sensing applications</span></li>
+    </ul>
+
+    <p class="subheading">Benchmarks</p>
+    <div class="table-wrapper">
+      <table class="comparison-table">
+        <thead>
+          <tr><th>Feature</th><th>Classical AI (SOTA)</th><th>Quanverge Hybrid</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Simulation Cycles</td><td>Days to Weeks each</td><td>Hours</td></tr>
+          <tr><td>Training Data</td><td>Large simulation datasets</td><td>&gt;50x Fewer Samples</td></tr>
+          <tr><td>Hardware</td><td>GPU / HPC Cluster</td><td>CPU Only</td></tr>
+          <tr><td>Design Approach</td><td>Trial-and-error</td><td>Inverse design</td></tr>
+          <tr><td>Discovery Time</td><td>Months to Years</td><td>Weeks</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button class="roi-toggle" aria-expanded="false" aria-controls="roi-qreate">
+      <span class="plus">+</span> Calculate Qreate ROI for your organization
+    </button>
+
+    <div class="roi-panel" id="roi-qreate">
+      <p class="roi-title">Estimate your Qreate ROI</p>
+
+      <div class="roi-controls">
+        <div>
+          <label class="roi-control-label" for="qreate-samples">
+            <span>Simulation samples per design cycle</span>
+            <output for="qreate-samples"></output>
+          </label>
+          <input type="range" id="qreate-samples" data-roi-input data-roi-unit="samples"
+                 min="1000" max="2000000" step="1000" value="100000">
+        </div>
+      </div>
+
+      <div class="roi-results">
+        <div class="roi-result">
+          <p class="roi-result-label">Samples needed with Quanverge</p>
+          <p class="roi-result-value">
+            <span data-roi-output data-roi-source="qreate-samples" data-roi-op="divide" data-roi-by="50"></span>
+            <span class="unit">samples</span>
+          </p>
+          <p class="roi-cite">Based on: &gt;50x less data for simulations (shown at the conservative 50x)</p>
+        </div>
+      </div>
+
+      <p class="roi-disclaimer">
+        Illustrative estimate based on Quanverge's published benchmarks &mdash;
+        actual results vary by deployment.
+      </p>
+    </div>
+
+  </div>
+
+  <nav class="product-nav">
+    <a href="sanqya.html">&larr; SanQya</a>
+  </nav>
+</section>
+
+</main>
+
+
+<footer class="footer">
+  <div class="footer-inner">
+    <img src="images/QUANVERGE.jpeg" alt="Quanverge Labs logo">
+    <p>
+      &copy; <span id="year"></span> Quanverge Labs &amp; Mahindra University.
+      All rights reserved. <a href="contact.html">Contact Us</a>
+    </p>
+  </div>
+</footer>
+
+
+<script src="js/main.js"></script>
+</body>
+</html>
