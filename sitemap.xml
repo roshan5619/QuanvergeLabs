@@ -31,14 +31,34 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.quanvergelabs.com/research.html</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.quanvergelabs.com/team.html</loc>
     <lastmod>2026-08-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.quanvergelabs.com/research.html</loc>
+    <loc>https://www.quanvergelabs.com/team-jayasri.html</loc>
     <lastmod>2026-08-26</lastmod>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.quanvergelabs.com/team-sebastian.html</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.quanvergelabs.com/team-keerthi.html</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.quanvergelabs.com/team-roshan.html</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.quanvergelabs.com/contact.html</loc>

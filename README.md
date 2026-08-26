@@ -5,20 +5,27 @@ No build step, no framework, no `npm install`. Open the file and it works.
 
 ```
 quanverge-site/
-├── index.html          home page
-├── products.html       lists the four products
-├── reqagnize.html      \
-├── q-vis.html           |  one page per product
-├── sanqya.html          |  (detail, benchmarks, ROI calculator)
-├── qreate.html         /
-├── team.html
-├── research.html
-├── roadmap.html
+├── index.html            home page
+├── products.html         lists the four products
+├── reqagnize.html        \
+├── q-vis.html             |  one page per product
+├── sanqya.html            |  (detail, benchmarks, ROI calculator)
+├── qreate.html           /
+├── research.html         the five research domains
+├── team.html             the four team members
+├── team-jayasri.html     \
+├── team-sebastian.html    |  one profile page per person
+├── team-keerthi.html      |  (bio, expertise, publications)
+├── team-roshan.html      /
 ├── contact.html
-├── css/styles.css      all the styling, shared by every page
-├── js/main.js          menu, ROI calculators, scroll fade-in
-├── images/             the Quanverge logo (the only image on the site)
-└── README.md           this file
+├── 404.html              shown for a bad address
+├── css/styles.css        all the styling, shared by every page
+├── js/main.js            theme switch, menu, ROI calculators, fade-in
+├── images/               logo, product artwork, favicons, social card
+├── CNAME                 tells GitHub Pages which domain to serve
+├── sitemap.xml           helps Google find every page
+├── robots.txt
+└── README.md             this file
 ```
 
 Every page is self-contained: open it, edit it, save it. They all share the
@@ -46,10 +53,41 @@ browser. That's the whole workflow.
 | Headline, the five stat numbers, the problem cards | `index.html` |
 | The product list and its summary blurbs | `products.html` |
 | A product's description, use cases, table or calculator | that product's page, e.g. `q-vis.html` |
-| Names, roles, bios, LinkedIn links | `team.html` |
-| Publications (currently a placeholder) | `research.html` |
+| Names, roles and short bios | `team.html` |
+| One person's full profile and publications | `team-jayasri.html`, `team-sebastian.html`, `team-keerthi.html`, `team-roshan.html` |
+| Research domains and their sub-areas | `research.html` |
 | Address and email | `contact.html` |
 | The "page not found" page | `404.html` |
+
+### Adding a publication
+
+Open the relevant profile page, find the `<ul class="publication-list">` for the
+right heading, and copy an existing `<li>` block:
+
+```html
+<li>
+  <div class="pub-title">Paper title here</div>
+  <div class="pub-meta">A. Author, B. Author &middot;
+    <span class="pub-venue">Journal Name 12(3)</span>, 2026<span
+    class="pub-cites">4 citations</span></div>
+</li>
+```
+
+Drop the `pub-cites` span for a paper with no citations yet. If you update
+citation counts, also update the figures in the `metric-strip` near the top of
+that page and on `research.html`.
+
+### Research domain status
+
+Each domain card on `research.html` carries a status pill:
+
+| Class | Shows as | Use when |
+|---|---|---|
+| `status-pill is-productized` | Productized | A shipping product is built on it |
+| `status-pill is-active` | Active research | Real work underway, no product yet |
+| `status-pill` | Exploratory | Early-stage, nothing published |
+
+Keep these honest — the pill is what stops the page overstating the work.
 
 ### Adding or replacing images
 
@@ -70,18 +108,20 @@ These are repeated at the top and bottom of every page. That's the trade-off
 of a plain-HTML site: there is no way to write them once and share them
 without a build step or JavaScript.
 
-**So if you add a menu item or change the footer, make the same edit in all
-ten `.html` files.** The blocks are identical apart from one thing: on each
-page, the link for that page carries `class="is-current"`, which is what
-highlights it in teal.
+**So if you add a menu item or change the footer, make the same edit in every
+`.html` file.** The blocks are identical apart from one thing: on each page,
+the link for that page carries `class="is-current"`, which is what highlights
+it in teal.
 
-### Adding a team member's LinkedIn
+### Adding a team member
 
-In `team.html`, find their card and replace the `#`:
+1. Copy an existing profile page — `team-keerthi.html` is the simplest.
+2. Rename it, change the `<title>`, description, monogram, role and content.
+3. Add a matching card to the grid in `team.html`, linking to the new file.
+4. Add the page to `sitemap.xml`.
 
-```html
-<a href="https://www.linkedin.com/in/their-profile" target="_blank" rel="noopener noreferrer">
-```
+Only link out to profiles that aren't hosted by a university, and never copy
+a personal phone number onto the site.
 
 ### Changing the colours
 
@@ -140,7 +180,7 @@ remaining mistakes are removed, not 30 percentage points added — so an
 
 ### Adding a new page
 
-1. Copy the closest existing page (say `roadmap.html`) to a new filename.
+1. Copy the closest existing page (say `contact.html`) to a new filename.
 2. Change the `<title>`, the `<meta name="description">`, and the content.
 3. Move `class="is-current"` onto your new page's own link.
 4. Add the link to the navigation bar **in all the other pages too**:
