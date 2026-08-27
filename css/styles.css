@@ -1277,14 +1277,36 @@ input:focus-visible {
 
 /* --- Research domain cards --- */
 
+/* Two rows: the three productized domains, then the two under active
+   research. Each row is its own grid, so the split stays correct if a
+   domain moves between them. */
 .domain-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   margin-top: 36px;
 }
 
+.domain-grid.is-three { grid-template-columns: repeat(3, 1fr); }
+.domain-grid.is-two   { grid-template-columns: repeat(2, 1fr); margin-top: 20px; }
+
 .domain-card { padding: 28px; }
+
+/* Deliberately small: these sit beside a status pill and above a heading,
+   so they mark the card rather than dominate it. currentColor means they
+   pick up the brand colour and follow the theme with no extra rules. */
+.domain-icon {
+  width: 34px;
+  height: 34px;
+  display: block;
+  color: var(--brand);
+}
+
+.domain-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
 
 .domain-card h2 {
   font-family: var(--font-display);
