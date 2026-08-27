@@ -123,11 +123,13 @@ const THEME_KEY = 'quanverge-theme';
     return `₹${cr < 10 ? cr.toFixed(1) : Math.round(cr).toLocaleString('en-IN')} Cr`;
   };
 
-  // Turns 3289 seconds into "54.8 min", 65779 into "18.3 hours"
+  // Turns 3289 seconds into "54.8 min", 248400 into "69.0 hours".
+  // Hours are kept up to a week: a benchmark quoted in hours should still
+  // read in hours on screen, rather than turning into "2.9 days".
   const formatDuration = (s) => {
     if (s < 90) return `${s.toFixed(0)} sec`;
     if (s < 5400) return `${(s / 60).toFixed(1)} min`;
-    if (s < 172800) return `${(s / 3600).toFixed(1)} hours`;
+    if (s < 604800) return `${(s / 3600).toFixed(1)} hours`;
     return `${(s / 86400).toFixed(1)} days`;
   };
 

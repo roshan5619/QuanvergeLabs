@@ -125,7 +125,7 @@
         <tbody>
           <tr><td>Training Images</td><td>Millions</td><td>Few Hundred</td></tr>
           <tr><td>Hardware</td><td>GPU Required</td><td>CPU Only</td></tr>
-          <tr><td>Training Speed (1M faces)</td><td>Days</td><td>Hours</td></tr>
+          <tr><td>Training Speed (50k images, 100 epochs)</td><td>69 Hours</td><td>55 Minutes</td></tr>
           <tr><td>Security</td><td>AES/TLS Only</td><td>Quantum-Secure (PQC)</td></tr>
           <tr><td>Deployment</td><td>Weeks</td><td>Hours</td></tr>
         </tbody>
@@ -166,29 +166,41 @@
 
       <div class="roi-results">
         <div class="roi-result">
-          <p class="roi-result-label">Estimated training time on a 16&nbsp;GB CPU</p>
+          <p class="roi-result-label">Classical training</p>
+          <p class="roi-result-value">
+            <span data-roi-output data-roi-source="req-images req-epochs"
+                  data-roi-op="multiply" data-roi-by="0.049680000"
+                  data-roi-duration data-roi-prefix="&asymp;"></span>
+          </p>
+          <p class="roi-cite">Measured: 69 hours for 50,000 images over 100 epochs.</p>
+        </div>
+        <div class="roi-result">
+          <p class="roi-result-label">With ReQAgnIze, on a 16&nbsp;GB CPU</p>
           <p class="roi-result-value">
             <span data-roi-output data-roi-source="req-images req-epochs"
                   data-roi-op="multiply" data-roi-by="0.000657794"
                   data-roi-duration data-roi-prefix="&asymp;"></span>
           </p>
-          <p class="roi-cite">Scaled from a measured run: 50,000 images over 100
-            epochs completed in 3,288.97&nbsp;s on 16&nbsp;GB of RAM &mdash; about
-            0.66&nbsp;ms per image per epoch.</p>
+          <p class="roi-cite">Measured: 3,288.97&nbsp;s for the same workload, with no
+            GPU at any point.</p>
         </div>
         <div class="roi-result">
-          <p class="roi-result-label">GPUs required</p>
+          <p class="roi-result-label">Time saved</p>
           <p class="roi-result-value">
-            None <span class="unit">CPU only</span>
+            <span data-roi-output data-roi-source="req-images req-epochs"
+                  data-roi-op="multiply" data-roi-by="0.049022206"
+                  data-roi-duration data-roi-prefix="&asymp;"></span>
           </p>
-          <p class="roi-cite">The run above used no GPU at any point.</p>
+          <p class="roi-cite">A 76x speedup, on hardware costing a fraction of a
+            GPU cluster.</p>
         </div>
       </div>
 
       <p class="roi-disclaimer">
-        Scaled linearly from one measured run, so treat it as an indication
-        rather than a guarantee: throughput varies with image resolution, model
-        size and available memory, and very large datasets may not stay in RAM.
+        Scaled linearly from two measured runs on the same 50,000-image, 100-epoch
+        workload, so treat it as an indication rather than a guarantee: throughput
+        varies with image resolution, model size and available memory, and very
+        large datasets may not stay in RAM.
       </p>
     </div>
 
