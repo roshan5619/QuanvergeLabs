@@ -324,7 +324,6 @@ input:focus-visible {
   flex-shrink: 0;
 }
 
-.monogram-sm { width: 40px; height: 40px; font-size: 0.85rem; border-radius: 10px; }
 .monogram-lg { width: 72px; height: 72px; font-size: 1.5rem; border-radius: 50%; }
 
 /* Elements start invisible and fade upwards when scrolled into view.
@@ -580,9 +579,12 @@ input:focus-visible {
 }
 
 /* The row of five numbers (100x, 10x, 4, 20+, 350M+) */
+/* auto-fit rather than a fixed column count, so the row stays balanced
+   however many stats are present. A fixed count leaves an empty column
+   and pushes everything off-centre the moment one is removed. */
 .hero-stats {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 24px;
   max-width: 900px;
   margin: 64px auto 0;
@@ -629,13 +631,16 @@ input:focus-visible {
 
 .problem-card { padding: 28px; }
 
-.problem-card .dot {
-  display: block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--brand);
+/* Illustration at the top of each Problem card. Kept to 64px so every
+   source image renders at or below its native size and stays sharp. */
+.problem-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  object-fit: cover;
   margin-bottom: 16px;
+  background: #0b1a22;
+  border: 1px solid var(--border);
 }
 
 .problem-card h3 {
@@ -685,12 +690,25 @@ input:focus-visible {
   margin-bottom: 20px;
 }
 
+/* On a product detail page the visual is a supporting element, not the
+   subject, so it is capped small and centred — roughly 210px tall, about a
+   fifth of a typical viewport. The direct-child selector keeps this off the
+   figures inside .product-card on products.html, which should stay
+   full-width. Capping the size also means every image renders at or below
+   its native resolution, so nothing is upscaled. */
+.section > .product-viz,
+.section > .product-figure {
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Shows an image at its own size and shape instead of filling a wide frame.
    Use this when the artwork is small or nearly square: stretching it would
    blur it, and a 16:10 crop would cut the top and bottom off. */
 .product-figure.is-native {
   aspect-ratio: auto;
-  max-width: 420px;
+  max-width: 300px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -1079,6 +1097,21 @@ input:focus-visible {
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   margin-top: 28px;
+}
+
+/* Small landscape thumbnail on the home page product cards. The artwork is
+   wide, so a square chip would crop most of it away. */
+.product-thumb {
+  width: 96px;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #0b1a22;
+  border: 1px solid var(--border);
+}
+
+@supports not (aspect-ratio: 1) {
+  .product-thumb { height: 60px; }
 }
 
 .product-summary {
