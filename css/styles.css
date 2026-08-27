@@ -732,13 +732,6 @@ input:focus-visible {
   .product-viz { height: 400px; }
 }
 
-/* A scanning beam travelling down and back up */
-@keyframes viz-scan {
-  0%, 100% { transform: translateY(-96px); }
-  50%      { transform: translateY(96px); }
-}
-.viz-scan { animation: viz-scan 4.5s ease-in-out infinite; }
-
 /* Strokes that draw themselves in */
 @keyframes viz-draw { to { stroke-dashoffset: 0; } }
 .viz-draw {
@@ -766,6 +759,17 @@ input:focus-visible {
 .viz-appear {
   opacity: 0;
   animation: viz-appear 0.7s ease-out forwards;
+}
+
+/* A pulse of data travelling along a circuit trace. The paths carry
+   pathLength="100", so the dash lengths below are percentages of the
+   trace and every pulse moves at the same visual speed regardless of
+   how long its path actually is. */
+@keyframes viz-flow { to { stroke-dashoffset: 0; } }
+.viz-flow {
+  stroke-dasharray: 16 84;
+  stroke-dashoffset: 100;
+  animation: viz-flow 2.6s linear infinite;
 }
 
 /* A slow drift, used on the lattice */
