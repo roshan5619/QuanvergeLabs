@@ -56,6 +56,10 @@
   --green:         #067a5b;   /*  5.1 : 1 */
   --green-soft:    #e7f6f1;
 
+  /* Navigation bar. Semi-transparent so the page shows through the blur,
+     which is why it needs its own variable rather than reusing --bg. */
+  --nav-bg:        rgba(255, 255, 255, 0.9);
+
   /* --- Fonts (loaded from Google Fonts in index.html) ---------------- */
   --font-body:     "Outfit", system-ui, sans-serif;
   --font-display:  "Playfair Display", Georgia, serif;
@@ -100,6 +104,8 @@
 
   --green:         #4ade80;   /*  9.7 : 1 */
   --green-soft:    #102c1f;
+
+  --nav-bg:        rgba(11, 26, 34, 0.9);
 
   color-scheme: dark;
 }
@@ -348,7 +354,7 @@ input:focus-visible {
   left: 0;
   right: 0;
   z-index: 50;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--nav-bg);
   -webkit-backdrop-filter: blur(16px);
           backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
@@ -595,13 +601,23 @@ input:focus-visible {
   gap: 24px;
   max-width: 900px;
   margin: 64px auto 0;
+  /* Values are different lengths, so some wrap to two lines and others
+     don't. Aligning to the bottom keeps every label on the same line. */
+  align-items: end;
 }
 
 .hero-stat-value {
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 4vw, 2.3rem);
   font-weight: 700;
+  line-height: 1.15;
   color: var(--brand);
+}
+
+/* Short values like "4" or "20+" look lost next to a wrapped phrase such
+   as "Greater than 50x", so they are set larger to carry equal weight. */
+.hero-stat-value.is-short {
+  font-size: clamp(2.5rem, 6.5vw, 3.5rem);
 }
 
 .hero-stat-label {
