@@ -1,12 +1,13 @@
 /* ==========================================================================
    QUANVERGE LABS — page behaviour
    --------------------------------------------------------------------------
-   Five small independent features:
+   Six small independent features:
      1. Theme switch (light / dark)
      2. Mobile menu open/close
      3. ROI calculators
      4. Fade-in on scroll
      5. Footer year
+     6. Typewriter headline
    Each one is wrapped in its own block so you can read (or delete) them
    one at a time without affecting the others.
 
@@ -261,4 +262,71 @@ const THEME_KEY = 'quanverge-theme';
 (function footerYear() {
   const slot = $('#year');
   if (slot) slot.textContent = new Date().getFullYear();
+})();
+
+
+/* 6. TYPEWRITER HEADLINE ==================================================
+   Types the hero headline out one character at a time, with the caret
+   sitting at the end of whichever line is being written.
+
+   The full text stays written in the HTML and is only cleared once this
+   runs, so search engines and screen readers always get the complete
+   headline even though a visitor watches it appear.
+
+   To use it, put data-typewriter on the heading. Each element inside it
+   with class="text-gradient" is treated as one line.                     */
+
+(function typewriterHeadline() {
+  const heading = $('[data-typewriter]');
+  if (!heading) return;
+
+  const lines = $$('.text-gradient', heading);
+  if (!lines.length) return;
+
+  // Anyone who prefers reduced motion just gets the finished headline
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const caret = $('.caret', heading);
+  const text = lines.map((line) => line.textContent);
+
+  // Hold the finished height, or the rest of the page jumps upwards while
+  // the headline is still short.
+  heading.style.minHeight = heading.getBoundingClientRect().height + 'px';
+
+  lines.forEach((line) => { line.textContent = ''; });
+  if (caret) {
+    caret.classList.add('is-typing');   // solid while writing, blinks when done
+    lines[0].after(caret);
+  }
+
+  const CHAR_MS = 55;
+  const LINE_PAUSE_MS = 260;
+  const START_DELAY_MS = 350;
+  let lineIndex = 0;
+  let charIndex = 0;
+
+  function step() {
+    if (lineIndex >= text.length) {
+      heading.style.minHeight = '';
+      if (caret) caret.classList.remove('is-typing');
+      return;
+    }
+
+    const line = text[lineIndex];
+
+    if (charIndex < line.length) {
+      charIndex += 1;
+      lines[lineIndex].textContent = line.slice(0, charIndex);
+      setTimeout(step, CHAR_MS);
+      return;
+    }
+
+    // Line finished: move the caret down and carry on
+    lineIndex += 1;
+    charIndex = 0;
+    if (lineIndex < text.length && caret) lines[lineIndex].after(caret);
+    setTimeout(step, LINE_PAUSE_MS);
+  }
+
+  setTimeout(step, START_DELAY_MS);
 })();

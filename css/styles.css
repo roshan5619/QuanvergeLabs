@@ -558,6 +558,13 @@ input:focus-visible {
   animation: blink 1s steps(1) infinite;
 }
 
+/* Stays solid while characters are being typed, the way a real cursor
+   does, and goes back to blinking once the line is finished. */
+.caret.is-typing {
+  animation: none;
+  opacity: 1;
+}
+
 @keyframes blink {
   0%, 49%   { opacity: 1; }
   50%, 100% { opacity: 0; }
