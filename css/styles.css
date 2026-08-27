@@ -525,15 +525,17 @@ input:focus-visible {
   box-shadow: 0 6px 24px rgba(11, 37, 48, 0.14);
 }
 
+/* The company name sits directly beneath the logo, so it reads as part of
+   the brand lockup rather than as a small badge. The text-indent cancels
+   the trailing letter-space, which would otherwise push the wordmark
+   visibly left of centre. */
 .hero-eyebrow {
   display: inline-block;
-  padding: 7px 18px;
-  margin-bottom: 26px;
-  border: 1px solid rgba(20, 112, 138, 0.3);
-  border-radius: 999px;
-  background: var(--brand-soft);
-  font-size: 0.7rem;
-  letter-spacing: 0.28em;
+  margin-bottom: 24px;
+  font-size: clamp(1.15rem, 3vw, 1.65rem);
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
   text-transform: uppercase;
   color: var(--brand);
 }
