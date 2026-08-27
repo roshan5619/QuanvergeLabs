@@ -139,53 +139,56 @@
            data-roi-by     = the number to apply
            data-roi-cap    = optional maximum for the result           -->
     <button class="roi-toggle" aria-expanded="false" aria-controls="roi-reqagnize">
-      <span class="plus">+</span> Calculate ReQAgnIze ROI for your organization
+      <span class="plus">+</span> Estimate training time for your dataset
     </button>
 
     <div class="roi-panel" id="roi-reqagnize">
-      <p class="roi-title">Estimate your ReQAgnIze ROI</p>
+      <p class="roi-title">Estimate your ReQAgnIze training run</p>
 
       <div class="roi-controls">
         <div>
           <label class="roi-control-label" for="req-images">
-            <span>Training images you currently need</span>
+            <span>Training images</span>
             <output for="req-images"></output>
           </label>
           <input type="range" id="req-images" data-roi-input data-roi-unit="images"
-                 min="10000" max="10000000" step="10000" value="1000000">
+                 min="5000" max="1000000" step="5000" value="50000">
         </div>
         <div>
-          <label class="roi-control-label" for="req-weeks">
-            <span>Current deployment timeline</span>
-            <output for="req-weeks"></output>
+          <label class="roi-control-label" for="req-epochs">
+            <span>Training epochs</span>
+            <output for="req-epochs"></output>
           </label>
-          <input type="range" id="req-weeks" data-roi-input data-roi-unit="weeks"
-                 min="1" max="26" step="1" value="4">
+          <input type="range" id="req-epochs" data-roi-input data-roi-unit="epochs"
+                 min="10" max="300" step="10" value="100">
         </div>
       </div>
 
       <div class="roi-results">
         <div class="roi-result">
-          <p class="roi-result-label">Images needed with Quanverge</p>
+          <p class="roi-result-label">Estimated training time on a 16&nbsp;GB CPU</p>
           <p class="roi-result-value">
-            <span data-roi-output data-roi-source="req-images" data-roi-op="divide" data-roi-by="100"></span>
-            <span class="unit">images</span>
+            <span data-roi-output data-roi-source="req-images req-epochs"
+                  data-roi-op="multiply" data-roi-by="0.000657794"
+                  data-roi-duration data-roi-prefix="&asymp;"></span>
           </p>
-          <p class="roi-cite">Based on: 100x fewer training images (comparison table)</p>
+          <p class="roi-cite">Scaled from a measured run: 50,000 images over 100
+            epochs completed in 3,288.97&nbsp;s on 16&nbsp;GB of RAM &mdash; about
+            0.66&nbsp;ms per image per epoch.</p>
         </div>
         <div class="roi-result">
-          <p class="roi-result-label">Same timeline with Quanverge</p>
+          <p class="roi-result-label">GPUs required</p>
           <p class="roi-result-value">
-            <span data-roi-output data-roi-source="req-weeks" data-roi-op="multiply" data-roi-by="1"></span>
-            <span class="unit">hours (not weeks)</span>
+            None <span class="unit">CPU only</span>
           </p>
-          <p class="roi-cite">Based on: deployment drops from weeks to hours (comparison table)</p>
+          <p class="roi-cite">The run above used no GPU at any point.</p>
         </div>
       </div>
 
       <p class="roi-disclaimer">
-        Illustrative estimate based on Quanverge's published benchmarks &mdash;
-        actual results vary by deployment.
+        Scaled linearly from one measured run, so treat it as an indication
+        rather than a guarantee: throughput varies with image resolution, model
+        size and available memory, and very large datasets may not stay in RAM.
       </p>
     </div>
 

@@ -91,18 +91,26 @@ const THEME_KEY = 'quanverge-theme';
    this file.
 
    On a slider:            data-roi-input, data-roi-unit="images"
-   On a result <span>:     data-roi-source = id of the slider to read
+   On a result <span>:     data-roi-source = id of the slider to read.
+                                             Several ids, space separated,
+                                             are multiplied together first —
+                                             that's how the training-time
+                                             estimate uses images AND epochs.
                            data-roi-op     = divide | multiply | errorDrop
                            data-roi-by     = the number to apply
                            data-roi-cap    = optional maximum result
+                           data-roi-prefix = optional "≈" or "≤", for a
+                                             figure that is an estimate or a
+                                             bound rather than exact
 
    For a range instead of a single figure, give data-roi-by-min and
    data-roi-by-max instead of data-roi-by. The result then renders as
-   "low – high". Use this when a benchmark is a band ("3-8% savings")
+   "low – high". Use this when a benchmark is a band ("10-30% better")
    rather than one number.
 
-   Add data-roi-money to format the result as Indian currency in crore
-   rather than a plain number.                                            */
+   data-roi-money formats the result as Indian currency in crore.
+   data-roi-duration formats a number of seconds as minutes, hours or
+   days, whichever reads best.                                            */
 
 (function roiCalculators() {
 
@@ -113,6 +121,14 @@ const THEME_KEY = 'quanverge-theme';
   const formatMoney = (n) => {
     const cr = n / 1e7;
     return `₹${cr < 10 ? cr.toFixed(1) : Math.round(cr).toLocaleString('en-IN')} Cr`;
+  };
+
+  // Turns 3289 seconds into "54.8 min", 65779 into "18.3 hours"
+  const formatDuration = (s) => {
+    if (s < 90) return `${s.toFixed(0)} sec`;
+    if (s < 5400) return `${(s / 60).toFixed(1)} min`;
+    if (s < 172800) return `${(s / 3600).toFixed(1)} hours`;
+    return `${(s / 86400).toFixed(1)} days`;
   };
 
   function calculate(value, operation, by, cap) {
@@ -142,6 +158,35 @@ const THEME_KEY = 'quanverge-theme';
     return result;
   }
 
+  /** Recompute one result element from whichever sliders it names. */
+  function render(output) {
+    const d = output.dataset;
+    const cap = d.roiCap ? Number(d.roiCap) : undefined;
+
+    // Multiply every named slider together. A single id is the common case;
+    // two ids drive the training-time estimate (images x epochs).
+    const value = d.roiSource.split(/\s+/).reduce((acc, id) => {
+      const el = document.getElementById(id);
+      return el ? acc * Number(el.value) : acc;
+    }, 1);
+
+    const show = d.roiDuration !== undefined ? formatDuration
+               : d.roiMoney !== undefined ? formatMoney
+               : format;
+    const prefix = d.roiPrefix ? d.roiPrefix + ' ' : '';
+    const run = (by) => calculate(value, d.roiOp, Number(by), cap);
+
+    if (d.roiByMin !== undefined && d.roiByMax !== undefined) {
+      // A benchmark band, e.g. "10-30% better" -> render "low – high"
+      const a = run(d.roiByMin);
+      const b = run(d.roiByMax);
+      const [low, high] = a <= b ? [a, b] : [b, a];
+      output.textContent = `${prefix}${show(low)} – ${show(high)}`;
+    } else {
+      output.textContent = prefix + show(run(d.roiBy));
+    }
+  }
+
   function refresh(slider) {
     // Update the number shown next to the slider's label
     const label = $(`output[for="${slider.id}"]`);
@@ -149,24 +194,10 @@ const THEME_KEY = 'quanverge-theme';
       label.textContent = `${format(slider.value)} ${slider.dataset.roiUnit || ''}`.trim();
     }
 
-    // Update every result that reads from this slider
-    $$(`[data-roi-output][data-roi-source="${slider.id}"]`).forEach((output) => {
-      const d = output.dataset;
-      const cap = d.roiCap ? Number(d.roiCap) : undefined;
-      const value = Number(slider.value);
-      const show = d.roiMoney !== undefined ? formatMoney : format;
-
-      const run = (by) => calculate(value, d.roiOp, Number(by), cap);
-
-      if (d.roiByMin !== undefined && d.roiByMax !== undefined) {
-        // A benchmark band, e.g. "3-8% savings" -> render "low – high"
-        const a = run(d.roiByMin);
-        const b = run(d.roiByMax);
-        const [low, high] = a <= b ? [a, b] : [b, a];
-        output.textContent = `${show(low)} – ${show(high)}`;
-      } else {
-        output.textContent = show(run(d.roiBy));
-      }
+    // Update every result that reads from this slider. The attribute may
+    // list more than one id, so match on word boundaries rather than equality.
+    $$('[data-roi-output]').forEach((output) => {
+      if (output.dataset.roiSource.split(/\s+/).includes(slider.id)) render(output);
     });
   }
 
