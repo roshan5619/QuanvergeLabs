@@ -295,7 +295,7 @@ const THEME_KEY = 'quanverge-theme';
 
   lines.forEach((line) => { line.textContent = ''; });
   if (caret) {
-    caret.classList.add('is-typing');   // solid while writing, blinks when done
+    caret.classList.add('is-typing');   // shows the cursor; removed when done
     lines[0].after(caret);
   }
 

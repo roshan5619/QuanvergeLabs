@@ -553,27 +553,23 @@ input:focus-visible {
   text-transform: uppercase;
 }
 
-/* The blinking cursor after the headline */
+/* The cursor that follows the headline as it types. Hidden by default and
+   only shown while typing, so it disappears once the line is finished
+   rather than blinking away above the description. Hiding it here also
+   means it never appears at all if JavaScript doesn't run. */
 .caret {
-  display: inline-block;
+  display: none;
   width: 5px;
   height: 0.8em;
   margin-left: 6px;
   background: var(--brand-heading);
   vertical-align: middle;
-  animation: blink 1s steps(1) infinite;
 }
 
-/* Stays solid while characters are being typed, the way a real cursor
-   does, and goes back to blinking once the line is finished. */
+/* js/main.js adds this while the headline is being written, and removes it
+   when the last character lands. */
 .caret.is-typing {
-  animation: none;
-  opacity: 1;
-}
-
-@keyframes blink {
-  0%, 49%   { opacity: 1; }
-  50%, 100% { opacity: 0; }
+  display: inline-block;
 }
 
 .hero-subtitle {
