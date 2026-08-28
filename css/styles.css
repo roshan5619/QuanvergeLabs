@@ -76,6 +76,13 @@
   /* --- Layout -------------------------------------------------------- */
   --max-width:     1100px;
 
+  /* Height of one scrolling ticker band. Set here as a fixed number rather
+     than left to fall out of the padding, because three other things have to
+     agree with it exactly: where the navigation sticks, how much room the
+     page leaves at the bottom for the fixed footer band, and how far an
+     anchor jump has to clear. Change it here and all four stay in step. */
+  --ticker-h:      46px;
+
   /* Used by the browser for form controls and scrollbars */
   color-scheme: light;
 }
@@ -132,9 +139,15 @@
 
 /* The headline gradient runs between two pale cyans, which flattens into a
    single wash on a dark ground. Widening it to the logo's mid teal keeps
-   the sweep visible. */
+   the sweep visible.
+
+   background-image, NOT the background shorthand. The shorthand would also
+   reset background-clip back to border-box, and since this rule outranks the
+   .text-gradient rule below, the clip would be lost: the gradient would paint
+   the whole line box while the letters stayed transparent, turning the
+   headline into a solid rectangle. */
 :root[data-theme="dark"] .text-gradient {
-  background: linear-gradient(135deg, #8ae5f2 0%, #2cb9cd 50%, #8ae5f2 100%);
+  background-image: linear-gradient(135deg, #8ae5f2 0%, #2cb9cd 50%, #8ae5f2 100%);
 }
 
 
@@ -148,8 +161,9 @@
 
 html {
   scroll-behavior: smooth;
-  /* Stops the fixed navbar covering headings when you jump to a section */
-  scroll-padding-top: 90px;
+  /* Stops the pinned header band covering headings when you jump to a
+     section. It has to clear both rows now — the ticker and the navigation. */
+  scroll-padding-top: calc(var(--ticker-h) + 76px);
 }
 
 body {
@@ -162,7 +176,23 @@ body {
      browsers that don't know clip. */
   overflow-x: hidden;
   overflow-x: clip;
+
+  /* Leaves room for the ticker fixed across the bottom of the window, so the
+     real footer underneath it is still reachable rather than being covered. */
+  padding-bottom: var(--ticker-h);
+
+  /* Holds the footer down to the bottom of the window on pages with little
+     content. Without this, a short page like 404 ends halfway down and leaves
+     an empty strip between the footer and the ticker pinned below it. The
+     column is: ticker, navigation, main, footer — the two fixed elements
+     (the backdrop and the bottom ticker) are out of flow and unaffected. */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+
+/* Takes up whatever height is left over, pushing the footer down. */
+main { flex: 1 0 auto; }
 
 img {
   max-width: 100%;
@@ -378,9 +408,12 @@ input:focus-visible {
 
 /* 4. NAVIGATION BAR ======================================================== */
 
+/* Sticks directly below the ticker band above it, so the two travel down the
+   page together as one header. top must match the ticker's height exactly —
+   both read it from the same variable. */
 .navbar {
   position: sticky;
-  top: 0;
+  top: var(--ticker-h);
   z-index: 60;
   background: var(--nav-bg);
   -webkit-backdrop-filter: blur(16px);
@@ -1652,12 +1685,17 @@ input:focus-visible {
    its width, so the second copy lands where the first began and the loop
    has no visible seam. */
 
+/* Both bands stay on screen the whole time, so the height is pinned to a
+   variable instead of being whatever the padding happened to produce — the
+   navigation and the page's bottom spacing are both measured against it. */
 .ticker {
+  height: var(--ticker-h);
+  display: flex;
+  align-items: center;
   overflow: hidden;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   background: var(--brand-soft);
-  padding: 15px 0;
   /* Fade both ends so items appear and leave rather than being cut off */
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
           mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
@@ -1666,6 +1704,7 @@ input:focus-visible {
 .ticker-track {
   display: flex;
   width: max-content;
+  flex: none;            /* the flex parent would otherwise squash max-content */
   animation: ticker-scroll 42s linear infinite;
 }
 
@@ -1698,9 +1737,35 @@ input:focus-visible {
   opacity: 0.55;
 }
 
-/* The copy above the navigation. It scrolls away with the page rather than
-   being pinned, so it costs no permanent height on a phone. */
-.ticker-header { border-top: 0; }
+/* The copy above the navigation. It is the first thing in the page, so
+   sticking it at the top pins it immediately and it never scrolls away.
+   Above the navbar's 60 so the two never fight over the same pixels. */
+.ticker-header {
+  position: sticky;
+  top: 0;
+  z-index: 70;
+  border-top: 0;
+}
+
+/* The footer copy sits at the far end of the page, so sticky can't hold it on
+   screen — only fixed can. Below the navbar's 60, which lets the mobile menu
+   drop over the top of it instead of being clipped by it.
+
+   Matched by "a ticker that isn't the header one" rather than by a class of
+   its own, so no markup had to change on all fourteen pages. */
+.ticker:not(.ticker-header) {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 55;
+  border-bottom: 0;
+}
+
+/* Runs the other way. Both bands are now visible at once with the same words
+   in them, and scrolling them in the same direction at the same speed reads
+   as the page having rendered twice by mistake. */
+.ticker:not(.ticker-header) .ticker-track { animation-direction: reverse; }
 
 .footer {
   border-top: 1px solid var(--border);
@@ -1897,7 +1962,26 @@ input:focus-visible {
   .metric-strip { grid-template-columns: repeat(2, 1fr); padding: 16px; }
   .product-mark { width: 56px; height: 56px; }
 
+  /* Smaller type, so the band can be shorter. Both header and footer read
+     this, and so do the navigation's offset and the page's bottom spacing. */
+  :root { --ticker-h: 34px; }
   .ticker-item { font-size: 0.75rem; padding: 0 14px; }
+}
+
+
+/* --- Short windows ----------------------------------------------------
+   Mostly a phone turned sideways. Two pinned bands plus the navigation come
+   to around 158px, which is nearly half of a 360px-tall window. The footer
+   band gives way and returns to the bottom of the page; the header band
+   keeps its pin, because that is the row carrying the navigation. */
+
+@media (max-height: 520px) {
+  body { padding-bottom: 0; }
+
+  .ticker:not(.ticker-header) {
+    position: static;
+    border-bottom: 1px solid var(--border);
+  }
 }
 
 
