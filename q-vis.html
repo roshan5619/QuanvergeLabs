@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Q-Vis — Quantum-Enhanced Computer Vision | Quanverge Labs</title>
-  <meta name="description" content="Object detection, image processing, and on-device image compression at the edge — for UAV/AUV, manufacturing, agritech, and security deployments.">
+  <meta name="description" content="Patent-published object detection, image processing, and on-device image compression at the edge — for UAV/AUV, manufacturing, agritech, and security deployments.">
   <meta name="theme-color" content="#ffffff">
 
   <link rel="icon" href="images/favicon-32.png" sizes="32x32">
@@ -14,7 +14,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Quanverge Labs">
   <meta property="og:title" content="Q-Vis — Quantum-Enhanced Computer Vision | Quanverge Labs">
-  <meta property="og:description" content="Object detection, image processing, and on-device image compression at the edge — for UAV/AUV, manufacturing, agritech, and security deployments.">
+  <meta property="og:description" content="Patent-published object detection, image processing, and on-device image compression at the edge — for UAV/AUV, manufacturing, agritech, and security deployments.">
   <meta property="og:url" content="https://www.quanvergelabs.com/q-vis.html">
   <meta property="og:image" content="https://www.quanvergelabs.com/images/og-card.jpg">
   <meta name="twitter:card" content="summary_large_image">
@@ -37,7 +37,7 @@
         if (dark) {
           document.documentElement.dataset.theme = 'dark';
           var m = document.querySelector('meta[name="theme-color"]');
-          if (m) m.setAttribute('content', '#0b1a22');
+          if (m) m.setAttribute('content', '#061820');
         }
       } catch (e) { /* storage blocked - fall back to light */ }
     })();
@@ -51,7 +51,7 @@
   <div class="navbar-inner">
 
     <a href="index.html" class="navbar-logo">
-      <img src="images/QUANVERGE.jpeg" alt="Quanverge Labs logo">
+      <img src="images/logo-square.jpg" alt="Quanverge Labs logo">
       <span>Quanverge</span>
     </a>
 
@@ -82,7 +82,7 @@
   <a href="products.html" class="back-link">&larr; All Products</a>
 
   <div class="product-title-row">
-    <span class="monogram monogram-lg">Q-</span>
+    <img class="product-mark" src="images/q-vis.jpg" alt="Q-Vis: a processor chip on a circuit board surrounded by edge device icons" width="262" height="195">
     <div>
       <p class="product-category">Computer Vision</p>
       <h1 class="section-heading">Q-Vis</h1>
@@ -115,6 +115,9 @@
       <li><span class="arrow">&rarr;</span><span><strong>Security:</strong> Low-latency surveillance and perimeter monitoring at the edge</span></li>
     </ul>
 
+    <p class="subheading">Patent</p>
+    <p class="domain-evidence" style="margin-top:0">Published: <cite>System and method of object recognition using quantum-classical hybrid framework</cite></p>
+
     <p class="subheading">Benchmarks</p>
     <div class="table-wrapper">
       <table class="comparison-table">
@@ -132,8 +135,13 @@
       </table>
     </div>
 
-    <button class="roi-toggle" aria-expanded="false" aria-controls="roi-q-vis">
-      <span class="plus">+</span> Calculate Q-Vis ROI for your organization
+    <button class="roi-open" aria-expanded="false" aria-controls="roi-q-vis">
+      <svg class="roi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.2" y="2.6" width="17.6" height="18.8" rx="3"/><path d="M6.8 6.6 L17.2 6.6"/><path class="roi-bar roi-bar-1" d="M8 17.6 L8 14.4"/><path class="roi-bar roi-bar-2" d="M12 17.6 L12 11.6"/><path class="roi-bar roi-bar-3" d="M16 17.6 L16 12.8"/></svg>
+      <span class="roi-open-text">
+        <span class="roi-open-title">Calculate Q-Vis ROI for your organization</span>
+        <span class="roi-open-hint">Move the sliders to see the numbers for your own workload</span>
+      </span>
+      <svg class="roi-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9 L12 15 L18 9"/></svg>
     </button>
 
     <div class="roi-panel" id="roi-q-vis">
@@ -194,9 +202,12 @@
 </main>
 
 
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track"><span class="ticker-item">20+ Peer-Reviewed Papers</span><span class="ticker-item">580+ Citations</span><span class="ticker-item">Patent Published &mdash; Quantum-Classical Object Recognition</span><span class="ticker-item">CPU-Only &mdash; No GPU Required</span><span class="ticker-item">Validated on Real-World Bank Data</span><span class="ticker-item">6 Research Domains</span><span class="ticker-item">4 Product Lines</span><span class="ticker-item">20+ Peer-Reviewed Papers</span><span class="ticker-item">580+ Citations</span><span class="ticker-item">Patent Published &mdash; Quantum-Classical Object Recognition</span><span class="ticker-item">CPU-Only &mdash; No GPU Required</span><span class="ticker-item">Validated on Real-World Bank Data</span><span class="ticker-item">6 Research Domains</span><span class="ticker-item">4 Product Lines</span></div>
+</div>
 <footer class="footer">
   <div class="footer-inner">
-    <img src="images/QUANVERGE.jpeg" alt="Quanverge Labs logo">
+    <img src="images/logo-square.jpg" alt="Quanverge Labs logo">
     <p>
       &copy; <span id="year"></span> Quanverge Labs.
       All rights reserved. <a href="contact.html">Contact Us</a>

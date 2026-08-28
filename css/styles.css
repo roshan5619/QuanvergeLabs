@@ -13,8 +13,8 @@
      8. Team
      9. Research
     10. Contact
-    11. Final call-to-action & footer
-    12. Mobile layout
+    11. Ticker, final call-to-action & footer
+    12. Responsive layout (TV, tablet, phone, small phone)
     13. Reduced-motion support
    ========================================================================== */
 
@@ -77,37 +77,47 @@
    these, so nothing below needs to know which theme is active.
 
    The switch is driven by a data-theme attribute on <html>, set by
-   js/main.js. Ratios below are measured against --bg (#0b1a22).
+   js/main.js. Ratios below are measured against --bg (#061820).
 
    Note the brand colour flips: the logo's bright cyan (#2fc6d6) is
    unreadable on white but excellent on dark, so dark mode uses it
    directly instead of the darkened teal.                                  */
 
 :root[data-theme="dark"] {
-  --bg:            #0b1a22;
-  --surface:       #12262f;
-  --surface-2:     #17303b;
-  --border:        #23414e;
+  /* Grounds are the logo's deep navy-teal (#15516d, hue 199) stepped down
+     in lightness, so the dark theme carries the brand's colour instead of
+     the near-neutral grey it used before. */
+  --bg:            #061820;
+  --surface:       #092531;
+  --surface-2:     #0d3142;
+  --border:        #134b64;
 
-  --text:          #eef6f8;   /* 15.0 : 1 */
-  --text-muted:    #a8c2cc;   /*  8.4 : 1 */
-  --text-faint:    #8aa6b2;   /*  6.1 : 1 */
+  --text:          #eaf4f8;   /* 16.2 : 1 */
+  --text-muted:    #a5c3ce;   /*  9.8 : 1 */
+  --text-faint:    #86a5b2;   /*  6.9 : 1 */
 
-  --brand:         #4fd8e8;   /* 10.0 : 1  links, small text */
-  --brand-strong:  #8fe9f3;   /*           hover — brighter on dark */
-  --brand-heading: #4fd8e8;
-  --brand-fill:    #2fc6d6;
-  --brand-soft:    #10333d;   /*           badge / pill backgrounds */
+  --brand:         #4ecfe4;   /*  9.8 : 1  links, small text */
+  --brand-strong:  #8ae5f2;   /* 12.6 : 1  hover — brighter on dark */
+  --brand-heading: #4ecfe4;
+  --brand-fill:    #2cb9cd;   /*           the logo's own bright cyan */
+  --brand-soft:    #0d3646;   /*           badge / pill backgrounds */
 
-  --accent:        #f0b44e;   /*  9.9 : 1  ROI figures */
-  --accent-soft:   #2e2412;
+  --accent:        #f0b44e;   /*  9.8 : 1  ROI figures */
+  --accent-soft:   #2b2312;
 
-  --green:         #4ade80;   /*  9.7 : 1 */
-  --green-soft:    #102c1f;
+  --green:         #4ade80;   /* 10.4 : 1 */
+  --green-soft:    #0d2a1d;
 
-  --nav-bg:        rgba(11, 26, 34, 0.9);
+  --nav-bg:        rgba(6, 24, 32, 0.9);
 
   color-scheme: dark;
+}
+
+/* The headline gradient runs between two pale cyans, which flattens into a
+   single wash on a dark ground. Widening it to the logo's mid teal keeps
+   the sweep visible. */
+:root[data-theme="dark"] .text-gradient {
+  background: linear-gradient(135deg, #8ae5f2 0%, #2cb9cd 50%, #8ae5f2 100%);
 }
 
 
@@ -330,7 +340,6 @@ input:focus-visible {
   flex-shrink: 0;
 }
 
-.monogram-lg { width: 72px; height: 72px; font-size: 1.5rem; border-radius: 50%; }
 
 /* Elements start invisible and fade upwards when scrolled into view.
    The .is-visible class is added by js/main.js. */
@@ -818,6 +827,107 @@ input:focus-visible {
 }
 .viz-drift { animation: viz-drift 6s ease-in-out infinite; }
 
+/* The product's own artwork beside its name, replacing the letter chip */
+.product-mark {
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  object-fit: cover;
+  background: #0b1a22;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+/* --- Opening the ROI calculator ---------------------------------------
+   This used to be a line of text that read like a footnote. As a full
+   card it announces itself, and the bars in the icon rise on hover to
+   suggest what is behind it. */
+
+.roi-open {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  margin-top: 28px;
+  padding: 18px 20px;
+  text-align: left;
+  border: 1px solid var(--brand);
+  border-radius: 14px;
+  background: var(--brand-soft);
+  color: var(--brand);
+  transition: background-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+
+.roi-open:hover {
+  box-shadow: 0 6px 18px rgba(20, 112, 138, 0.18);
+  transform: translateY(-1px);
+}
+
+.roi-icon,
+.roi-chevron {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.roi-chevron {
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
+  transition: transform 0.3s;
+}
+
+.roi-open[aria-expanded="true"] .roi-chevron { transform: rotate(180deg); }
+
+.roi-open-text { display: block; }
+
+.roi-open-title {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.roi-open-hint {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+/* Bars grow on hover, staggered so they read as a chart filling in */
+.roi-bar {
+  transform-origin: bottom;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.roi-open:hover .roi-bar-1 { transform: scaleY(1.45); }
+.roi-open:hover .roi-bar-2 { transform: scaleY(1.25); transition-delay: 0.05s; }
+.roi-open:hover .roi-bar-3 { transform: scaleY(1.6);  transition-delay: 0.1s; }
+
+/* --- Scan overlay on the ReQAgnIze photo -------------------------------
+   Sits on top of the artwork rather than replacing it: a beam sweeping
+   down the frame, reticle corners and pulsing detection points. */
+
+.scan-frame { position: relative; }
+
+.scan-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+@keyframes scan-sweep {
+  0%, 100% { transform: translateY(4%); }
+  50%      { transform: translateY(88%); }
+}
+
+.scan-beam { animation: scan-sweep 4.5s ease-in-out infinite; }
+
 /* The body of a single product page */
 .product-detail { padding: 34px; }
 
@@ -990,29 +1100,6 @@ input:focus-visible {
 
 /* --- ROI calculator --- */
 
-.roi-toggle {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 26px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--brand);
-  transition: color 0.2s;
-}
-
-.roi-toggle:hover { color: var(--brand-strong); }
-
-/* The "+" rotates into an "×" when the panel is open */
-.roi-toggle .plus {
-  display: inline-block;
-  font-size: 1.2rem;
-  transition: transform 0.3s;
-}
-
-.roi-toggle[aria-expanded="true"] .plus { transform: rotate(45deg); }
 
 .roi-panel {
   display: none;
@@ -1531,6 +1618,57 @@ input:focus-visible {
 
 .final-cta .btn { margin-top: 36px; }
 
+/* --- Scrolling proof-point ticker --------------------------------------
+   The list is written twice in the HTML and the strip slides exactly half
+   its width, so the second copy lands where the first began and the loop
+   has no visible seam. */
+
+.ticker {
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--brand-soft);
+  padding: 11px 0;
+  /* Fade both ends so items appear and leave rather than being cut off */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 42s linear infinite;
+}
+
+.ticker:hover .ticker-track { animation-play-state: paused; }
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 22px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--brand);
+  white-space: nowrap;
+}
+
+/* Diamond separator between items */
+.ticker-item::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  transform: rotate(45deg);
+  background: var(--brand);
+  opacity: 0.55;
+}
+
 .footer {
   border-top: 1px solid var(--border);
   background: var(--surface);
@@ -1559,8 +1697,68 @@ input:focus-visible {
 .footer-inner a:hover { color: var(--brand-strong); }
 
 
-/* 12. MOBILE LAYOUT ========================================================
-   Anything inside this block only applies on screens 860px wide or less.   */
+/* 12. RESPONSIVE LAYOUT ====================================================
+   Four sizes, smallest rule last so the narrower ones win:
+
+     >= 1600px   large monitors and TVs
+     861-1100px  tablets and small laptops
+     <= 860px    phones and narrow tablets
+     <= 480px    small phones
+   ========================================================================== */
+
+
+/* --- Large monitors and TVs ------------------------------------------
+   The layout otherwise stops at 1100px and strands a big screen in
+   whitespace. Widen the container and scale the type, since a TV is read
+   from across the room rather than at arm's length. */
+
+@media (min-width: 1600px) {
+  :root { --max-width: 1400px; }
+
+  .section { padding: 120px 40px; }
+  .page-header { padding-top: 170px; }
+
+  body { font-size: 1.08rem; }
+
+  .hero-title { font-size: clamp(4rem, 5.5vw, 6rem); }
+  .hero-subtitle { max-width: 720px; font-size: 1.2rem; }
+  .hero-logo { width: 170px; height: 170px; }
+  .hero-stats { max-width: 1150px; }
+
+  .section-heading { font-size: clamp(2.6rem, 3.4vw, 3.8rem); }
+  .section-intro { max-width: 760px; font-size: 1.1rem; }
+
+  .navbar-inner { max-width: 1560px; }
+  .footer-inner { max-width: 1400px; }
+
+  /* The product visual is capped small on purpose, but at this size it can
+     take a little more room without dominating. */
+  .section > .product-viz,
+  .section > .product-figure { max-width: 440px; }
+  .product-figure.is-native { max-width: 380px; }
+}
+
+@media (min-width: 2400px) {
+  :root { --max-width: 1700px; }
+  body { font-size: 1.18rem; }
+  .navbar-inner { max-width: 1860px; }
+}
+
+
+/* --- Tablets and small laptops ---------------------------------------
+   Three-column grids step down to two here, rather than dropping straight
+   from three to one at the phone breakpoint. */
+
+@media (max-width: 1100px) and (min-width: 861px) {
+  .domain-grid.is-three,
+  .product-summary-grid,
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* --- Phones and narrow tablets --------------------------------------- */
 
 @media (max-width: 860px) {
 
@@ -1628,6 +1826,47 @@ input:focus-visible {
 
   .footer-inner { flex-direction: column; text-align: center; }
 }
+
+/* --- Small phones -----------------------------------------------------
+   Tighter spacing and smaller type, so a 360px screen doesn't spend most
+   of its width on padding. */
+
+@media (max-width: 480px) {
+  .section { padding: 44px 16px; }
+  .page-header { padding-top: 96px; }
+
+  .hero { padding-top: 104px; }
+  .hero-logo { width: 78px; height: 78px; border-radius: 16px; }
+  .hero-title { font-size: clamp(1.9rem, 9vw, 2.4rem); }
+  .hero-subtitle { font-size: 0.95rem; }
+  .hero-eyebrow { font-size: 0.95rem; letter-spacing: 0.2em; }
+
+  /* Two stats per row rather than four cramped ones */
+  .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 40px; }
+  .hero-stat-value { font-size: 1.4rem; }
+  .hero-stat-value.is-short { font-size: 2rem; }
+
+  .hero-buttons { flex-direction: column; align-items: stretch; }
+  .hero-buttons .btn,
+  .hero-buttons .btn-outline { text-align: center; padding: 14px 20px; }
+
+  .section-heading { font-size: clamp(1.6rem, 7vw, 2rem); }
+
+  .card, .problem-card, .domain-card, .team-card { padding: 20px; }
+  .product-detail, .profile-body { padding: 20px; }
+
+  /* Slider value sits under its label instead of fighting for the same row */
+  .roi-control-label { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .roi-panel { padding: 18px; }
+  .roi-open { padding: 14px 16px; gap: 12px; }
+  .roi-open-hint { display: none; }
+
+  .metric-strip { grid-template-columns: repeat(2, 1fr); padding: 16px; }
+  .product-mark { width: 56px; height: 56px; }
+
+  .ticker-item { font-size: 0.75rem; padding: 0 14px; }
+}
+
 
 
 /* 13. REDUCED-MOTION SUPPORT ===============================================

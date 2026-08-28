@@ -47,7 +47,7 @@ const THEME_KEY = 'quanverge-theme';
 
     // Keep the browser UI (address bar on mobile) in step with the page
     const meta = $('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', next === 'dark' ? '#0b1a22' : '#ffffff');
+    if (meta) meta.setAttribute('content', next === 'dark' ? '#061820' : '#ffffff');
 
     // Private browsing can make localStorage throw, so never let it break the page
     try {
@@ -210,8 +210,8 @@ const THEME_KEY = 'quanverge-theme';
     refresh(slider);
   });
 
-  // The "+ Calculate ... ROI" buttons open and close their panel
-  $$('.roi-toggle').forEach((button) => {
+  // The card above each panel opens and closes it
+  $$('.roi-open').forEach((button) => {
     button.addEventListener('click', () => {
       const panel = document.getElementById(button.getAttribute('aria-controls'));
       if (!panel) return;

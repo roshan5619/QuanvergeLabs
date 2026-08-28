@@ -37,7 +37,7 @@
         if (dark) {
           document.documentElement.dataset.theme = 'dark';
           var m = document.querySelector('meta[name="theme-color"]');
-          if (m) m.setAttribute('content', '#0b1a22');
+          if (m) m.setAttribute('content', '#061820');
         }
       } catch (e) { /* storage blocked - fall back to light */ }
     })();
@@ -51,7 +51,7 @@
   <div class="navbar-inner">
 
     <a href="index.html" class="navbar-logo">
-      <img src="images/QUANVERGE.jpeg" alt="Quanverge Labs logo">
+      <img src="images/logo-square.jpg" alt="Quanverge Labs logo">
       <span>Quanverge</span>
     </a>
 
@@ -90,9 +90,9 @@
   </p>
 
   <div class="metric-strip">
-    <div><div class="metric-value">20+</div><div class="metric-label">Peer-Reviewed Papers</div></div>
+    <div><div class="metric-value">25+</div><div class="metric-label">Peer-Reviewed Papers</div></div>
     <div><div class="metric-value">580+</div><div class="metric-label">Citations</div></div>
-    <div><div class="metric-value">9</div><div class="metric-label">Highest h-index</div></div>
+    <div><div class="metric-value">2</div><div class="metric-label">Patents Published</div></div>
     <div><div class="metric-value">6</div><div class="metric-label">Research Domains</div></div>
   </div>
   <p class="subheading-note">
@@ -113,7 +113,7 @@
       <li>DeepFake Detection</li>
       <li>Image Compression</li>
     </ul>
-    <p class="domain-evidence">Published work: <cite>Image compression using quantum wavelet transforms</cite> — Quantum Computing V, 2025</p>
+    <p class="domain-evidence">Published work: <cite>Image compression using quantum wavelet transforms</cite> — Quantum Computing V, 2025<br>Patent published: <cite>System and method of object recognition using quantum-classical hybrid framework</cite></p>
     <a class="domain-link" href="q-vis.html">See Q-Vis &rarr;</a>
   </div>
   <div class="card domain-card reveal">
@@ -134,7 +134,7 @@
     <div class="domain-card-top"><span class="status-pill is-productized">Productized</span><svg class="domain-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.7 L20.3 7 L20.3 17 L12 21.3 L3.7 17 L3.7 7 Z"/><path d="M12 2.7 L12 21.3"/><path d="M3.7 7 L20.3 17"/><path d="M20.3 7 L3.7 17"/><circle cx="12" cy="12" r="1.7" fill="currentColor" stroke="none"/></svg></div>
     <h2>Photonics &amp; Materials</h2>
     <ul class="domain-areas">
-      <li>Metamaterials</li>
+      <li>Materials</li>
       <li>Metasurfaces</li>
       <li>Liquid Crystals</li>
       <li>Inverse Design</li>
@@ -161,7 +161,7 @@
       <li>Battery Health &amp; EV</li>
       <li>Audio-based Engine Health</li>
     </ul>
-    <p class="domain-evidence">Research in progress. No published results yet.</p>
+    <p class="domain-evidence">Research in progress.</p>
   </div>
   <div class="card domain-card reveal">
     <div class="domain-card-top"><span class="status-pill is-active">Active research</span><svg class="domain-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.6 5.2 L5.2 9.6 L8.4 12.8 L12.8 8.4 Z"/><path d="M15.6 11.2 L11.2 15.6 L14.4 18.8 L18.8 14.4 Z"/><path d="M10.6 13.4 L13.4 10.6"/><path d="M15.4 5.2 A5.6 5.6 0 0 1 18.8 8.6"/><path d="M14.2 2.6 A9 9 0 0 1 21.4 9.8"/></svg></div>
@@ -170,16 +170,19 @@
       <li>Communication Protocols</li>
       <li>Navigation Optimization</li>
     </ul>
-    <p class="domain-evidence">Research in progress. No published results yet.</p>
+    <p class="domain-evidence">Research in progress.</p>
   </div>
   </div>
 </section>
 </main>
 
 
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track"><span class="ticker-item">20+ Peer-Reviewed Papers</span><span class="ticker-item">580+ Citations</span><span class="ticker-item">Patent Published &mdash; Quantum-Classical Object Recognition</span><span class="ticker-item">CPU-Only &mdash; No GPU Required</span><span class="ticker-item">Validated on Real-World Bank Data</span><span class="ticker-item">6 Research Domains</span><span class="ticker-item">4 Product Lines</span><span class="ticker-item">20+ Peer-Reviewed Papers</span><span class="ticker-item">580+ Citations</span><span class="ticker-item">Patent Published &mdash; Quantum-Classical Object Recognition</span><span class="ticker-item">CPU-Only &mdash; No GPU Required</span><span class="ticker-item">Validated on Real-World Bank Data</span><span class="ticker-item">6 Research Domains</span><span class="ticker-item">4 Product Lines</span></div>
+</div>
 <footer class="footer">
   <div class="footer-inner">
-    <img src="images/QUANVERGE.jpeg" alt="Quanverge Labs logo">
+    <img src="images/logo-square.jpg" alt="Quanverge Labs logo">
     <p>
       &copy; <span id="year"></span> Quanverge Labs.
       All rights reserved. <a href="contact.html">Contact Us</a>

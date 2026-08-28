@@ -37,7 +37,7 @@
         if (dark) {
           document.documentElement.dataset.theme = 'dark';
           var m = document.querySelector('meta[name="theme-color"]');
-          if (m) m.setAttribute('content', '#0b1a22');
+          if (m) m.setAttribute('content', '#061820');
         }
       } catch (e) { /* storage blocked - fall back to light */ }
     })();
@@ -51,7 +51,7 @@
   <div class="navbar-inner">
 
     <a href="index.html" class="navbar-logo">
-      <img src="images/QUANVERGE.jpeg" alt="Quanverge Labs logo">
+      <img src="images/logo-square.jpg" alt="Quanverge Labs logo">
       <span>Quanverge</span>
     </a>
 
@@ -82,7 +82,7 @@
   <a href="products.html" class="back-link">&larr; All Products</a>
 
   <div class="product-title-row">
-    <span class="monogram monogram-lg">Sa</span>
+    <img class="product-mark" src="images/sanqya.jpg" alt="SanQya: a rising bar chart inside a sphere orbited by data paths" width="424" height="270">
     <div>
       <p class="product-category">Financial Intelligence</p>
       <h1 class="section-heading">SanQya</h1>
@@ -96,7 +96,7 @@
     infrastructure.
   </p>
 
-  <span class="product-badge">10-30% better accuracy</span>
+  <span class="product-badge">5-10% better accuracy</span>
 </section>
 
 
@@ -121,7 +121,7 @@
           <tr><th>Feature</th><th>Classical AI (SOTA)</th><th>Quanverge Hybrid</th></tr>
         </thead>
         <tbody>
-          <tr><td>Model Accuracy</td><td>Baseline (SOTA ML)</td><td>+10-30%</td></tr>
+          <tr><td>Model Accuracy</td><td>Baseline (SOTA ML)</td><td>+5-10%</td></tr>
           <tr><td>Hardware</td><td>GPU Required</td><td>CPU Only</td></tr>
           <tr><td>Validation</td><td>Synthetic / backtest only</td><td>Real bank data (NDA)</td></tr>
           <tr><td>Fraud False Positives</td><td>High</td><td>Reduced</td></tr>
@@ -130,8 +130,13 @@
       </table>
     </div>
 
-    <button class="roi-toggle" aria-expanded="false" aria-controls="roi-sanqya">
-      <span class="plus">+</span> Calculate SanQya ROI for your organization
+    <button class="roi-open" aria-expanded="false" aria-controls="roi-sanqya">
+      <svg class="roi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.2" y="2.6" width="17.6" height="18.8" rx="3"/><path d="M6.8 6.6 L17.2 6.6"/><path class="roi-bar roi-bar-1" d="M8 17.6 L8 14.4"/><path class="roi-bar roi-bar-2" d="M12 17.6 L12 11.6"/><path class="roi-bar roi-bar-3" d="M16 17.6 L16 12.8"/></svg>
+      <span class="roi-open-text">
+        <span class="roi-open-title">Calculate SanQya ROI for your organization</span>
+        <span class="roi-open-hint">Move the sliders to see the numbers for your own workload</span>
+      </span>
+      <svg class="roi-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9 L12 15 L18 9"/></svg>
     </button>
 
     <div class="roi-panel" id="roi-sanqya">
@@ -152,10 +157,10 @@
         <div class="roi-result">
           <p class="roi-result-label">Estimated accuracy with Quanverge</p>
           <p class="roi-result-value">
-            <span data-roi-output data-roi-source="sanqya-accuracy" data-roi-op="errorDrop" data-roi-by-min="0.10" data-roi-by-max="0.30"></span>
+            <span data-roi-output data-roi-source="sanqya-accuracy" data-roi-op="errorDrop" data-roi-by-min="0.05" data-roi-by-max="0.10"></span>
             <span class="unit">%</span>
           </p>
-          <p class="roi-cite">Based on: the full 10-30% better accuracy band measured on real bank data</p>
+          <p class="roi-cite">Based on: the full 5-10% better accuracy band measured on real bank data</p>
         </div>
       </div>
 
@@ -176,9 +181,12 @@
 </main>
 
 
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track"><span class="ticker-item">20+ Peer-Reviewed Papers</span><span class="ticker-item">580+ Citations</span><span class="ticker-item">Patent Published &mdash; Quantum-Classical Object Recognition</span><span class="ticker-item">CPU-Only &mdash; No GPU Required</span><span class="ticker-item">Validated on Real-World Bank Data</span><span class="ticker-item">6 Research Domains</span><span class="ticker-item">4 Product Lines</span><span class="ticker-item">20+ Peer-Reviewed Papers</span><span class="ticker-item">580+ Citations</span><span class="ticker-item">Patent Published &mdash; Quantum-Classical Object Recognition</span><span class="ticker-item">CPU-Only &mdash; No GPU Required</span><span class="ticker-item">Validated on Real-World Bank Data</span><span class="ticker-item">6 Research Domains</span><span class="ticker-item">4 Product Lines</span></div>
+</div>
 <footer class="footer">
   <div class="footer-inner">
-    <img src="images/QUANVERGE.jpeg" alt="Quanverge Labs logo">
+    <img src="images/logo-square.jpg" alt="Quanverge Labs logo">
     <p>
       &copy; <span id="year"></span> Quanverge Labs.
       All rights reserved. <a href="contact.html">Contact Us</a>

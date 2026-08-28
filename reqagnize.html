@@ -37,7 +37,7 @@
         if (dark) {
           document.documentElement.dataset.theme = 'dark';
           var m = document.querySelector('meta[name="theme-color"]');
-          if (m) m.setAttribute('content', '#0b1a22');
+          if (m) m.setAttribute('content', '#061820');
         }
       } catch (e) { /* storage blocked - fall back to light */ }
     })();
@@ -51,7 +51,7 @@
   <div class="navbar-inner">
 
     <a href="index.html" class="navbar-logo">
-      <img src="images/QUANVERGE.jpeg" alt="Quanverge Labs logo">
+      <img src="images/logo-square.jpg" alt="Quanverge Labs logo">
       <span>Quanverge</span>
     </a>
 
@@ -82,7 +82,7 @@
   <a href="products.html" class="back-link">&larr; All Products</a>
 
   <div class="product-title-row">
-    <span class="monogram monogram-lg">Re</span>
+    <img class="product-mark" src="images/reqagnize.jpg" alt="ReQAgnIze: a face shown half as a photograph and half as a biometric wireframe mesh" width="402" height="391">
     <div>
       <p class="product-category">Digital Identity</p>
       <h1 class="section-heading">ReQAgnIze</h1>
@@ -101,10 +101,27 @@
 
 
 <section class="section section-tight">
-  <figure class="product-figure is-native">
+  <figure class="product-figure is-native scan-frame">
     <img src="images/reqagnize.jpg"
          alt="ReQAgnIze: a face shown half as a photograph and half as a biometric wireframe mesh, inside a circular scanning interface"
          width="402" height="391">
+    <svg class="scan-overlay" viewBox="0 0 100 100" preserveAspectRatio="none"
+         aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#2cb9cd" stroke-width="1.2" stroke-linecap="round" opacity="0.9">
+        <path d="M4 14 V4 H14"/><path d="M86 4 H96 V14"/>
+        <path d="M96 86 V96 H86"/><path d="M14 96 H4 V86"/>
+      </g>
+      <g class="scan-beam">
+        <rect x="6" y="0" width="88" height="0.7" fill="#8ae5f2" opacity="0.95"/>
+        <rect x="6" y="-6" width="88" height="6" fill="#2cb9cd" opacity="0.18"/>
+      </g>
+      <g fill="#8ae5f2">
+        <circle class="viz-pulse" cx="22" cy="30" r="1.4" style="animation-delay:0s"/>
+        <circle class="viz-pulse" cx="78" cy="30" r="1.4" style="animation-delay:.4s"/>
+        <circle class="viz-pulse" cx="22" cy="70" r="1.4" style="animation-delay:.8s"/>
+        <circle class="viz-pulse" cx="78" cy="70" r="1.4" style="animation-delay:1.2s"/>
+      </g>
+    </svg>
   </figure>
 
   <div class="card card-brand product-detail">
@@ -138,8 +155,13 @@
            data-roi-op     = divide | multiply | errorDrop
            data-roi-by     = the number to apply
            data-roi-cap    = optional maximum for the result           -->
-    <button class="roi-toggle" aria-expanded="false" aria-controls="roi-reqagnize">
-      <span class="plus">+</span> Estimate training time for your dataset
+    <button class="roi-open" aria-expanded="false" aria-controls="roi-reqagnize">
+      <svg class="roi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.2" y="2.6" width="17.6" height="18.8" rx="3"/><path d="M6.8 6.6 L17.2 6.6"/><path class="roi-bar roi-bar-1" d="M8 17.6 L8 14.4"/><path class="roi-bar roi-bar-2" d="M12 17.6 L12 11.6"/><path class="roi-bar roi-bar-3" d="M16 17.6 L16 12.8"/></svg>
+      <span class="roi-open-text">
+        <span class="roi-open-title">Estimate training time for your dataset</span>
+        <span class="roi-open-hint">Move the sliders to see the numbers for your own workload</span>
+      </span>
+      <svg class="roi-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9 L12 15 L18 9"/></svg>
     </button>
 
     <div class="roi-panel" id="roi-reqagnize">
@@ -214,9 +236,12 @@
 </main>
 
 
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track"><span class="ticker-item">20+ Peer-Reviewed Papers</span><span class="ticker-item">580+ Citations</span><span class="ticker-item">Patent Published &mdash; Quantum-Classical Object Recognition</span><span class="ticker-item">CPU-Only &mdash; No GPU Required</span><span class="ticker-item">Validated on Real-World Bank Data</span><span class="ticker-item">6 Research Domains</span><span class="ticker-item">4 Product Lines</span><span class="ticker-item">20+ Peer-Reviewed Papers</span><span class="ticker-item">580+ Citations</span><span class="ticker-item">Patent Published &mdash; Quantum-Classical Object Recognition</span><span class="ticker-item">CPU-Only &mdash; No GPU Required</span><span class="ticker-item">Validated on Real-World Bank Data</span><span class="ticker-item">6 Research Domains</span><span class="ticker-item">4 Product Lines</span></div>
+</div>
 <footer class="footer">
   <div class="footer-inner">
-    <img src="images/QUANVERGE.jpeg" alt="Quanverge Labs logo">
+    <img src="images/logo-square.jpg" alt="Quanverge Labs logo">
     <p>
       &copy; <span id="year"></span> Quanverge Labs.
       All rights reserved. <a href="contact.html">Contact Us</a>
