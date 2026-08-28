@@ -60,6 +60,15 @@
      which is why it needs its own variable rather than reusing --bg. */
   --nav-bg:        rgba(255, 255, 255, 0.9);
 
+  /* --- Decoration -----------------------------------------------------
+     These four were previously hardcoded, which meant they were tuned for
+     white and quietly disappeared on a dark ground: the backdrop grid, the
+     tinted borders and every shadow all vanished at once. */
+  --ring:          rgba(20, 112, 138, 0.28);   /* brand-tinted card borders */
+  --ring-accent:   rgba(154, 100, 16, 0.28);   /* amber borders (ROI, pills) */
+  --shadow:        rgba(11, 37, 48, 0.10);     /* elevation */
+  --grid-line:     rgba(20, 112, 138, 0.05);   /* backdrop grid */
+
   /* --- Fonts (loaded from Google Fonts in index.html) ---------------- */
   --font-body:     "Outfit", system-ui, sans-serif;
   --font-display:  "Playfair Display", Georgia, serif;
@@ -110,6 +119,14 @@
 
   --nav-bg:        rgba(6, 24, 32, 0.9);
 
+  /* Brighter and more opaque than their light counterparts: a border that
+     reads clearly on white is invisible on near-black, and a dark shadow
+     shows nothing, so elevation comes from a deeper black instead. */
+  --ring:          rgba(78, 207, 228, 0.38);
+  --ring-accent:   rgba(240, 180, 78, 0.38);
+  --shadow:        rgba(0, 0, 0, 0.5);
+  --grid-line:     rgba(78, 207, 228, 0.07);
+
   color-scheme: dark;
 }
 
@@ -140,7 +157,11 @@ body {
   color: var(--text);
   font-family: var(--font-body);
   line-height: 1.6;
+  /* clip, not hidden: hidden creates a scroll container, which would stop
+     the sticky navigation from sticking. hidden is left as a fallback for
+     browsers that don't know clip. */
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
 img {
@@ -176,8 +197,8 @@ input:focus-visible {
   inset: 0;
   z-index: -1;
   background-image:
-    linear-gradient(rgba(20, 112, 138, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(20, 112, 138, 0.05) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 48px 48px;
   /* Fades the grid out towards the edges */
   -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 75%);
@@ -197,7 +218,7 @@ input:focus-visible {
 /* The first section on an interior page. The extra top padding clears the
    fixed navigation bar. */
 .page-header {
-  padding-top: 130px;
+  padding-top: 50px;
   padding-bottom: 20px;
 }
 
@@ -254,12 +275,12 @@ input:focus-visible {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 20px;
-  box-shadow: 0 1px 3px rgba(11, 37, 48, 0.06);
+  box-shadow: 0 1px 3px var(--shadow);
 }
 
 /* Same panel but with a teal edge, for emphasis */
 .card-brand {
-  border-color: rgba(20, 112, 138, 0.28);
+  border-color: var(--ring);
 }
 
 /* Filled teal button. In light mode the fill is dark teal with white text;
@@ -285,7 +306,7 @@ input:focus-visible {
 .btn:hover {
   background-position: right center;
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(20, 112, 138, 0.28);
+  box-shadow: 0 12px 28px var(--shadow);
 }
 
 /* Outlined version of the button */
@@ -358,11 +379,9 @@ input:focus-visible {
 /* 4. NAVIGATION BAR ======================================================== */
 
 .navbar {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
-  z-index: 50;
+  z-index: 60;
   background: var(--nav-bg);
   -webkit-backdrop-filter: blur(16px);
           backdrop-filter: blur(16px);
@@ -401,7 +420,7 @@ input:focus-visible {
   object-fit: cover;
   background: #ffffff;
   padding: 3px;
-  box-shadow: 0 1px 3px rgba(11, 37, 48, 0.12);
+  box-shadow: 0 1px 3px var(--shadow);
 }
 
 .navbar-links {
@@ -488,7 +507,7 @@ input:focus-visible {
 
 .hero {
   text-align: center;
-  padding-top: 150px;
+  padding-top: 70px;
 }
 
 /* The thin "systems operational" strip at the very top */
@@ -536,7 +555,7 @@ input:focus-visible {
   object-fit: cover;
   background: #ffffff;
   padding: 6px;
-  box-shadow: 0 6px 24px rgba(11, 37, 48, 0.14);
+  box-shadow: 0 6px 24px var(--shadow);
 }
 
 /* The company name sits directly beneath the logo, so it reads as part of
@@ -859,7 +878,7 @@ input:focus-visible {
 }
 
 .roi-open:hover {
-  box-shadow: 0 6px 18px rgba(20, 112, 138, 0.18);
+  box-shadow: 0 6px 18px var(--shadow);
   transform: translateY(-1px);
 }
 
@@ -973,7 +992,7 @@ input:focus-visible {
 
 .product-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 24px rgba(11, 37, 48, 0.1);
+  box-shadow: 0 10px 24px var(--shadow);
 }
 
 .product-card .product-title-row { margin-top: 0; }
@@ -1030,7 +1049,7 @@ input:focus-visible {
   display: inline-block;
   margin-top: 24px;
   padding: 7px 18px;
-  border: 1px solid rgba(20, 112, 138, 0.3);
+  border: 1px solid var(--ring);
   border-radius: 999px;
   background: var(--brand-soft);
   font-size: 0.75rem;
@@ -1157,7 +1176,7 @@ input:focus-visible {
 
 .roi-result {
   padding: 16px;
-  border: 1px solid rgba(154, 100, 16, 0.25);
+  border: 1px solid var(--ring-accent);
   border-radius: 12px;
   background: var(--accent-soft);
 }
@@ -1229,7 +1248,7 @@ input:focus-visible {
 
 .product-summary:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 24px rgba(11, 37, 48, 0.1);
+  box-shadow: 0 10px 24px var(--shadow);
 }
 
 .product-summary h4 {
@@ -1472,13 +1491,13 @@ input:focus-visible {
 }
 
 .status-pill.is-productized {
-  border-color: rgba(20, 112, 138, 0.35);
+  border-color: var(--ring);
   background: var(--brand-soft);
   color: var(--brand);
 }
 
 .status-pill.is-active {
-  border-color: rgba(154, 100, 16, 0.3);
+  border-color: var(--ring-accent);
   background: var(--accent-soft);
   color: var(--accent);
 }
@@ -1544,6 +1563,16 @@ input:focus-visible {
   color: var(--text);
   font-weight: 600;
   font-size: 0.95rem;
+}
+
+/* Titles link to the paper, so they need to look clickable */
+.pub-title a { transition: color 0.2s; }
+
+.pub-title a:hover,
+.pub-title a:focus-visible {
+  color: var(--brand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .pub-meta {
@@ -1628,7 +1657,7 @@ input:focus-visible {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   background: var(--brand-soft);
-  padding: 11px 0;
+  padding: 15px 0;
   /* Fade both ends so items appear and leave rather than being cut off */
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
           mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
@@ -1650,9 +1679,9 @@ input:focus-visible {
 .ticker-item {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
-  padding: 0 22px;
-  font-size: 0.82rem;
+  gap: 16px;
+  padding: 0 26px;
+  font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   color: var(--brand);
@@ -1662,12 +1691,16 @@ input:focus-visible {
 /* Diamond separator between items */
 .ticker-item::after {
   content: "";
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   transform: rotate(45deg);
   background: var(--brand);
   opacity: 0.55;
 }
+
+/* The copy above the navigation. It scrolls away with the page rather than
+   being pinned, so it costs no permanent height on a phone. */
+.ticker-header { border-top: 0; }
 
 .footer {
   border-top: 1px solid var(--border);
@@ -1716,7 +1749,7 @@ input:focus-visible {
   :root { --max-width: 1400px; }
 
   .section { padding: 120px 40px; }
-  .page-header { padding-top: 170px; }
+  .page-header { padding-top: 70px; }
 
   body { font-size: 1.08rem; }
 
@@ -1777,7 +1810,7 @@ input:focus-visible {
     padding: 12px 24px 20px;
     background: var(--bg);
     border-top: 1px solid var(--border);
-    box-shadow: 0 8px 16px rgba(11, 37, 48, 0.08);
+    box-shadow: 0 8px 16px var(--shadow);
   }
 
   /* .is-open is added by js/main.js when the hamburger is tapped */
@@ -1785,7 +1818,7 @@ input:focus-visible {
 
   .navbar-links li { padding: 10px 0; }
 
-  .hero { padding-top: 130px; }
+  .hero { padding-top: 50px; }
 
   .hero-logo { width: 96px; height: 96px; border-radius: 20px; }
 
@@ -1813,7 +1846,7 @@ input:focus-visible {
   .metric-strip { padding: 20px; gap: 16px; }
 
   .section { padding: 60px 20px; }
-  .page-header { padding-top: 110px; }
+  .page-header { padding-top: 40px; }
 
   .product-detail { padding: 24px; }
 
@@ -1833,9 +1866,9 @@ input:focus-visible {
 
 @media (max-width: 480px) {
   .section { padding: 44px 16px; }
-  .page-header { padding-top: 96px; }
+  .page-header { padding-top: 32px; }
 
-  .hero { padding-top: 104px; }
+  .hero { padding-top: 40px; }
   .hero-logo { width: 78px; height: 78px; border-radius: 16px; }
   .hero-title { font-size: clamp(1.9rem, 9vw, 2.4rem); }
   .hero-subtitle { font-size: 0.95rem; }
