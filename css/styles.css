@@ -979,11 +979,27 @@ input:focus-visible {
 .roi-open:hover .roi-bar-2 { transform: scaleY(1.25); transition-delay: 0.05s; }
 .roi-open:hover .roi-bar-3 { transform: scaleY(1.6);  transition-delay: 0.1s; }
 
-/* The scan overlay that used to sit on the ReQAgnIze photograph lived here.
-   The photo has been replaced by a drawn diagram like the other three
-   products have, so the overlay, its sweeping beam and its reticle corners
-   have nothing left to sit on top of. The reticle corners now belong to the
-   diagram itself, drawn as part of it rather than layered over it. */
+/* --- Scan overlay on the ReQAgnIze photo -------------------------------
+   Sits on top of the artwork rather than replacing it: a beam sweeping
+   down the frame, reticle corners and pulsing detection points. */
+
+.scan-frame { position: relative; }
+
+.scan-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+@keyframes scan-sweep {
+  0%, 100% { transform: translateY(4%); }
+  50%      { transform: translateY(88%); }
+}
+
+.scan-beam { animation: scan-sweep 4.5s ease-in-out infinite; }
 
 /* The body of a single product page */
 .product-detail { padding: 34px; }
@@ -2057,16 +2073,4 @@ input:focus-visible {
 
   /* Make sure fade-in content is visible even without the animation */
   .reveal { opacity: 1; transform: none; }
-
-  /* The product diagrams animate in from nothing, so with the animation cut
-     short they need putting into their finished state by hand. Without this,
-     .viz-appear stays invisible, .viz-draw stays undrawn, and the connecting
-     traces show as a single short dash, because .viz-flow only paints 16% of
-     the path at a time and relies on movement to fill the rest in. */
-  .viz-appear { opacity: 1; }
-  .viz-draw { stroke-dashoffset: 0; }
-  .viz-rise { transform: none; }
-  .viz-pulse { opacity: 1; }
-  .viz-flow { stroke-dasharray: none; stroke-dashoffset: 0; }
-  .viz-drift { transform: none; }
 }
