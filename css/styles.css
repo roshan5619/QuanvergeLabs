@@ -2073,4 +2073,29 @@ input:focus-visible {
 
   /* Make sure fade-in content is visible even without the animation */
   .reveal { opacity: 1; transform: none; }
+
+  /* The product diagrams animate themselves into existence, so cutting the
+     animation short is not enough - each one has to be put into its finished
+     state by hand, or it is simply never drawn.
+
+       .viz-appear  starts at opacity 0        -> stays invisible
+       .viz-draw    starts fully dash-offset   -> stays undrawn
+       .viz-rise    starts at scaleY(0)        -> bars stay flat
+       .viz-pulse   dips to opacity 0.3        -> can land faded
+       .viz-flow    paints 16% of a path and relies on movement for the rest,
+                    so it stops as a single short dash instead of a trace
+       .viz-drift   a slow positional loop
+
+     Without this, someone who has asked their device to reduce motion gets a
+     product page with most of its diagram missing. */
+  .viz-appear { opacity: 1; }
+  .viz-draw { stroke-dashoffset: 0; }
+  .viz-rise { transform: none; }
+  .viz-pulse { opacity: 1; }
+  .viz-flow { stroke-dasharray: none; stroke-dashoffset: 0; }
+  .viz-drift { transform: none; }
+
+  /* The scan beam sweeps down the ReQAgnIze artwork. Frozen it would sit at
+     the top edge, so park it over the middle where it reads as deliberate. */
+  .scan-beam { transform: translateY(46%); }
 }
